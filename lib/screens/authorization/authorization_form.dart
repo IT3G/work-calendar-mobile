@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
-import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
 
 class AuthorizationForm extends StatefulWidget {
@@ -93,23 +92,29 @@ class AuthorizationFormState extends State<AuthorizationForm> {
         key: _authorizationFormKey,
         child: Column(
           children: [
-            CupertinoTextField(
-              keyboardType: TextInputType.emailAddress,
-              controller: loginController,
-              placeholder: 'Логин',
-              padding: EdgeInsets.all(10),
-              style: TextStyle(
-                fontSize: 20,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoTextField(
+                keyboardType: TextInputType.emailAddress,
+                controller: loginController,
+                placeholder: 'Логин',
+                padding: EdgeInsets.all(10),
+                style: TextStyle(
+                  fontSize: 20,
+                ),
               ),
             ),
-            CupertinoTextField(
-              controller: passwordController,
-              style: TextStyle(fontSize: 20),
-              obscureText: true,
-              enableSuggestions: false,
-              autocorrect: false,
-              placeholder: 'Пароль',
-              padding: EdgeInsets.all(10),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: CupertinoTextField(
+                controller: passwordController,
+                style: TextStyle(fontSize: 20),
+                obscureText: true,
+                enableSuggestions: false,
+                autocorrect: false,
+                placeholder: 'Пароль',
+                padding: EdgeInsets.all(10),
+              ),
             ),
             GestureDetector(
               onTap: handleSubmit,
