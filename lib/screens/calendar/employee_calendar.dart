@@ -11,11 +11,6 @@ class EmployeeCalendar extends StatelessWidget {
 
   EmployeeCalendar({Key? key, required this.tasks}) : super(key: key);
 
-  void openCreateEventsForm(BuildContext context) {
-    Navigator.of(context).push(
-        ModalOverlay(title: "Создать событие", child: EmployeeCalendarForm()));
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -28,9 +23,6 @@ class EmployeeCalendar extends StatelessWidget {
             monthViewSettings: MonthViewSettings(showAgenda: true),
           ),
         ),
-        TextButton(
-            onPressed: () => openCreateEventsForm(context),
-            child: Text("Создать событие"))
       ],
     );
   }

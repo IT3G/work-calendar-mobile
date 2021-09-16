@@ -46,7 +46,7 @@ class ModalOverlay extends ModalRoute {
       appBar: CupertinoNavigationBar(
         middle: Text(title),
       ),
-      body: Container(),
+      body: Container(child: child),
     );
   }
 
