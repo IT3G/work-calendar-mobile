@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EmployeeCalendarForm extends StatefulWidget {
   EmployeeCalendarForm({Key? key}) : super(key: key);
@@ -16,7 +17,11 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
     return Form(
         key: _calendarFormKey,
         child: Column(
-          children: [],
+          children: [
+            SfDateRangePicker(
+              selectionMode: DateRangePickerSelectionMode.range,
+            ),
+          ],
         ));
   }
 }

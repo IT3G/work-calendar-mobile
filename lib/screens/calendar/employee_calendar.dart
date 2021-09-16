@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/calendar/employee_calendar_form.dart';
+import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/calendar_event.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
@@ -9,6 +10,11 @@ class EmployeeCalendar extends StatelessWidget {
   final List<Task> tasks;
 
   EmployeeCalendar({Key? key, required this.tasks}) : super(key: key);
+
+  void openCreateEventsForm(BuildContext context) {
+    Navigator.of(context).push(
+        ModalOverlay(title: "Создать событие", child: EmployeeCalendarForm()));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,9 @@ class EmployeeCalendar extends StatelessWidget {
             monthViewSettings: MonthViewSettings(showAgenda: true),
           ),
         ),
-        EmployeeCalendarForm()
+        TextButton(
+            onPressed: () => openCreateEventsForm(context),
+            child: Text("Создать событие"))
       ],
     );
   }
