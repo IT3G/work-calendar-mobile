@@ -48,7 +48,7 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
       Map<String, String> task = getTaskForSend(data);
 
       Response response = await ApiService.setTaskEmployee(task);
-      print(response.body);
+      Navigator.pop(context);
     } catch (error) {
       print(error);
     } finally {
