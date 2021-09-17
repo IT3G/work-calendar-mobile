@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/constants/calendar_const.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
@@ -13,9 +14,23 @@ class EmployeeCalendarForm extends StatefulWidget {
 class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
   final _calendarFormKey = GlobalKey<FormState>();
 
-  String selectedEventType = 'Стандартно';
+  Map<String, String> selectedEventType = eventTypeNames[0];
   Map<String, dynamic> rangeDate = {};
-  // TextEditingController commentField = new TextEditingController();
+  TextEditingController commentField = new TextEditingController();
+
+  void createTask() async {
+    try {
+      Map<String, dynamic> data = {
+        'dateStart': rangeDate['dateStart'],
+        'dateEnd': rangeDate['dateEnd'],
+        'comment': commentField.text,
+        'employee': '',
+        'type': selectedEventType['value']
+      };
+
+      print(data);
+    } catch (error) {} finally {}
+  }
 
   void openEventTypes() {
     showCupertinoModalPopup<void>(
@@ -26,9 +41,9 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
           style: TextStyle(fontSize: 20),
         ),
         actions: <CupertinoActionSheetAction>[
-          for (String eventTypeName in eventTypeNames)
+          for (Map<String, String> eventTypeName in eventTypeNames)
             CupertinoActionSheetAction(
-              child: Text(eventTypeName),
+              child: Text(eventTypeName['name']!),
               onPressed: () {
                 setState(() {
                   selectedEventType = eventTypeName;
@@ -85,7 +100,7 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
                         Padding(
                           padding: EdgeInsets.only(left: 10),
                           child: Text(
-                            selectedEventType,
+                            selectedEventType['name']!,
                             style: TextStyle(
                                 fontSize: 20, color: Colors.blueAccent),
                           ),
@@ -94,16 +109,24 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
                     ),
                   )),
               Container(
-                // decoration: BoxDecoration(
-                //     border: Border(
-                //         bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
                 child: Padding(
                   padding: EdgeInsets.all(10),
                   child: CupertinoTextField(
+                    controller: commentField,
                     placeholder: "Комментарий",
                     minLines: 3,
                     maxLines: 3,
                   ),
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.all(10),
+                child: FullButton(
+                  child: Text(
+                    "Добавить",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
+                  onPress: createTask,
                 ),
               )
             ],

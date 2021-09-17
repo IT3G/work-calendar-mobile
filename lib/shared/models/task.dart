@@ -1,13 +1,13 @@
 class Task {
   final bool approved;
-  final Map<String, dynamic> attachment;
+  final Map<String, dynamic>? attachment;
   final String comment;
   final String dateEnd;
   final String dateStart;
   final String employee;
   final String employeeCreated;
   final String type;
-  final String id;
+  final String? id;
   final String dtCreated;
 
   Task(

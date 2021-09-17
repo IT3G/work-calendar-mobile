@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/shared/models/calendar_event.dart';
+import 'package:it2g_calendar_mobile/shared/models/event_types.dart';
 import 'package:it2g_calendar_mobile/shared/models/named_event_type.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 
@@ -46,15 +47,29 @@ List<CalendarEvent> getCalendarEvents(List<Task> tasks) {
 
 NamedEventType mapEventTypeToColoredData(String eventType) {
   switch (eventType) {
-    case "LEFT":
+    case EventTypes.left:
       return new NamedEventType(name: "Отсутствие", color: Colors.red);
 
-    case "CUSTOM":
+    case EventTypes.custom:
       return new NamedEventType(name: "Особое", color: Colors.blue);
 
-    case "VACATION":
+    case EventTypes.vacation:
       return NamedEventType(name: "Отпуск", color: Colors.green);
   }
 
   return NamedEventType(name: "Стандартно", color: Colors.white);
+}
+
+Task getTaskForSend(Map<String, dynamic> formData) {
+  return new Task(
+      id: null,
+      dateStart: formData['dateStart'],
+      dateEnd: formData['dateEnd'] ?? formData['dateStart'],
+      approved: false,
+      attachment: null,
+      comment: formData['comment'],
+      employee: formData['employee'],
+      employeeCreated: formData['employee'],
+      type: formData['type'],
+      dtCreated: '');
 }
