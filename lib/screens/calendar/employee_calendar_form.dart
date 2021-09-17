@@ -13,7 +13,7 @@ class EmployeeCalendarForm extends StatefulWidget {
 class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
   final _calendarFormKey = GlobalKey<FormState>();
 
-  String selectedEventType = '';
+  String selectedEventType = 'Стандартно';
   Map<String, dynamic> rangeDate = {};
   // TextEditingController commentField = new TextEditingController();
 
@@ -57,15 +57,39 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SfDateRangePicker(
-              onSelectionChanged: onSelectDate,
-              selectionMode: DateRangePickerSelectionMode.range,
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
+              child: SfDateRangePicker(
+                onSelectionChanged: onSelectDate,
+                selectionMode: DateRangePickerSelectionMode.range,
+              ),
             ),
-            TextButton(
-                onPressed: openEventTypes,
-                child: Text(
-                  "Вид $selectedEventType",
-                  style: TextStyle(fontSize: 20),
+            Container(
+                padding: EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                    border: Border(
+                        bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
+                child: GestureDetector(
+                  onTap: openEventTypes,
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Вид:",
+                        style: TextStyle(fontSize: 20, color: Colors.grey),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          selectedEventType,
+                          style:
+                              TextStyle(fontSize: 20, color: Colors.blueAccent),
+                        ),
+                      )
+                    ],
+                  ),
                 )),
           ],
         ));
