@@ -21,6 +21,7 @@ class App extends StatelessWidget {
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 CupertinoApp(
                   home: NavigationContainer(),
+                  theme: CupertinoThemeData(brightness: Brightness.light),
                 )));
   }
 }
