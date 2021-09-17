@@ -52,46 +52,62 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-        key: _calendarFormKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  border: Border(
-                      bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
-              child: SfDateRangePicker(
-                onSelectionChanged: onSelectDate,
-                selectionMode: DateRangePickerSelectionMode.range,
-              ),
-            ),
-            Container(
-                padding: EdgeInsets.all(10),
+    return ListView(children: [
+      Form(
+          key: _calendarFormKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
                 decoration: BoxDecoration(
                     border: Border(
                         bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
-                child: GestureDetector(
-                  onTap: openEventTypes,
-                  child: Row(
-                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        "Вид:",
-                        style: TextStyle(fontSize: 20, color: Colors.grey),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text(
-                          selectedEventType,
-                          style:
-                              TextStyle(fontSize: 20, color: Colors.blueAccent),
+                child: SfDateRangePicker(
+                  onSelectionChanged: onSelectDate,
+                  selectionMode: DateRangePickerSelectionMode.range,
+                ),
+              ),
+              Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                      border: Border(
+                          bottom:
+                              BorderSide(color: Colors.grey.withAlpha(80)))),
+                  child: GestureDetector(
+                    onTap: openEventTypes,
+                    child: Row(
+                      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          "Вид:",
+                          style: TextStyle(fontSize: 20, color: Colors.grey),
                         ),
-                      )
-                    ],
+                        Padding(
+                          padding: EdgeInsets.only(left: 10),
+                          child: Text(
+                            selectedEventType,
+                            style: TextStyle(
+                                fontSize: 20, color: Colors.blueAccent),
+                          ),
+                        )
+                      ],
+                    ),
+                  )),
+              Container(
+                // decoration: BoxDecoration(
+                //     border: Border(
+                //         bottom: BorderSide(color: Colors.grey.withAlpha(80)))),
+                child: Padding(
+                  padding: EdgeInsets.all(10),
+                  child: CupertinoTextField(
+                    placeholder: "Комментарий",
+                    minLines: 3,
+                    maxLines: 3,
                   ),
-                )),
-          ],
-        ));
+                ),
+              )
+            ],
+          )),
+    ]);
   }
 }

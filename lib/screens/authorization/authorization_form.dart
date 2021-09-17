@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
+import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
 
 class AuthorizationForm extends StatefulWidget {
@@ -116,19 +117,12 @@ class AuthorizationFormState extends State<AuthorizationForm> {
                 padding: EdgeInsets.all(10),
               ),
             ),
-            GestureDetector(
-              onTap: handleSubmit,
-              child: Container(
-                  width: MediaQuery.of(context).size.width * 0.85,
-                  alignment: Alignment.center,
-                  padding: EdgeInsets.all(10),
-                  margin: EdgeInsets.only(top: 20),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: Colors.blue,
-                  ),
-                  child: buttonContent()),
-            ),
+            Padding(
+                padding: EdgeInsets.all(8.0),
+                child: FullButton(
+                  child: buttonContent(),
+                  onPress: handleSubmit,
+                ))
           ],
         ));
   }
