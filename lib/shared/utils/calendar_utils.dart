@@ -4,6 +4,8 @@ import 'package:it2g_calendar_mobile/shared/models/event_types.dart';
 import 'package:it2g_calendar_mobile/shared/models/named_event_type.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 
+import 'package:it2g_calendar_mobile/shared/extensions/date_time.dart';
+
 List<Task> getTasks(List<dynamic> data) {
   List<Task> tasks = [];
 
@@ -61,10 +63,13 @@ NamedEventType mapEventTypeToColoredData(String eventType) {
 }
 
 Task getTaskForSend(Map<String, dynamic> formData) {
+  DateTime dateEnd = formData['dateEnd'] ?? formData['dateStart'];
+  DateTime dateStart = formData['dateStart'];
+
   return new Task(
       id: null,
-      dateStart: formData['dateStart'],
-      dateEnd: formData['dateEnd'] ?? formData['dateStart'],
+      dateStart: dateStart.getDateWithoutTime(),
+      dateEnd: dateEnd.getDateWithoutTime(),
       approved: false,
       attachment: null,
       comment: formData['comment'],

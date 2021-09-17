@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/constants/calendar_const.dart';
+import 'package:it2g_calendar_mobile/shared/models/task.dart';
+import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EmployeeCalendarForm extends StatefulWidget {
@@ -28,8 +30,12 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
         'type': selectedEventType['value']
       };
 
-      print(data);
-    } catch (error) {} finally {}
+      Task task = getTaskForSend(data);
+
+      print(task.dateEnd);
+    } catch (error) {
+      print(error);
+    } finally {}
   }
 
   void openEventTypes() {
