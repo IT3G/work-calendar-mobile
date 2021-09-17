@@ -1,6 +1,7 @@
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
+import 'package:it2g_calendar_mobile/shared/models/task.dart';
 
 class ApiService {
   static String _authToken = "";
@@ -20,10 +21,10 @@ class ApiService {
     return http.get(url, headers: {'Authorization': _authToken});
   }
 
-  static Future<Response> setTaskEmployee() {
-    Uri url = Uri.parse(ApiUrls.tasksEmployee);
+  static Future<Response> setTaskEmployee(Map<String, String> task) {
+    Uri url = Uri.parse(ApiUrls.tasks);
 
-    return http.post(url, headers: {'Authorization': _authToken}, body: {});
+    return http.post(url, headers: {'Authorization': _authToken}, body: task);
   }
 }
 

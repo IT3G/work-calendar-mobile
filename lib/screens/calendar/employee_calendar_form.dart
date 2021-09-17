@@ -1,19 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/constants/calendar_const.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
+import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EmployeeCalendarForm extends StatefulWidget {
-  EmployeeCalendarForm({Key? key}) : super(key: key);
+  final User user;
+
+  EmployeeCalendarForm({Key? key, required this.user}) : super(key: key);
 
   @override
-  EmployeeCalendarFormState createState() => new EmployeeCalendarFormState();
+  EmployeeCalendarFormState createState() =>
+      new EmployeeCalendarFormState(user: user);
 }
 
 class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
+  final User user;
+
+  EmployeeCalendarFormState({required this.user}) : super();
+
   final _calendarFormKey = GlobalKey<FormState>();
 
   Map<String, String> selectedEventType = eventTypeNames[0];
@@ -26,13 +36,14 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
         'dateStart': rangeDate['dateStart'],
         'dateEnd': rangeDate['dateEnd'],
         'comment': commentField.text,
-        'employee': '',
+        'employee': user.mailNickname,
         'type': selectedEventType['value']
       };
 
-      Task task = getTaskForSend(data);
+      Map<String, String> task = getTaskForSend(data);
 
-      print(task.dateEnd);
+      Response response = await ApiService.setTaskEmployee(task);
+      print(response.body);
     } catch (error) {
       print(error);
     } finally {}

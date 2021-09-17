@@ -62,19 +62,20 @@ NamedEventType mapEventTypeToColoredData(String eventType) {
   return NamedEventType(name: "Стандартно", color: Colors.white);
 }
 
-Task getTaskForSend(Map<String, dynamic> formData) {
+Map<String, String> getTaskForSend(Map<String, dynamic> formData) {
   DateTime dateEnd = formData['dateEnd'] ?? formData['dateStart'];
   DateTime dateStart = formData['dateStart'];
 
-  return new Task(
-      id: null,
-      dateStart: dateStart.getDateWithoutTime(),
-      dateEnd: dateEnd.getDateWithoutTime(),
-      approved: false,
-      attachment: null,
-      comment: formData['comment'],
-      employee: formData['employee'],
-      employeeCreated: formData['employee'],
-      type: formData['type'],
-      dtCreated: '');
+  return {
+    '_id': 'null',
+    'dateStart': dateStart.getDateWithoutTime(),
+    'dateEnd': dateEnd.getDateWithoutTime(),
+    'approved': 'false',
+    'attachment': 'null',
+    'comment': formData['comment'],
+    'employee': formData['employee'],
+    'employeeCreated': formData['employee'],
+    'type': formData['type'],
+    'dtCreated': ''
+  };
 }

@@ -37,8 +37,11 @@ class CalendarScreen extends StatelessWidget {
   }
 
   void openCreateEventsForm(BuildContext context) {
-    Navigator.of(context).push(
-        ModalOverlay(title: "Создать событие", child: EmployeeCalendarForm()));
+    Navigator.of(context).push(ModalOverlay(
+        title: "Создать событие",
+        child: EmployeeCalendarForm(
+          user: user,
+        )));
   }
 
   @override
