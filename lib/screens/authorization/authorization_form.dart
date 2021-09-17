@@ -77,16 +77,6 @@ class AuthorizationFormState extends State<AuthorizationForm> {
     }
   }
 
-  Widget buttonContent() {
-    if (loading) {
-      return SpinKitWave(color: Colors.white, size: 24);
-    }
-    return Text(
-      "Войти",
-      style: TextStyle(color: Colors.white, fontSize: 20),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -120,8 +110,12 @@ class AuthorizationFormState extends State<AuthorizationForm> {
             Padding(
                 padding: EdgeInsets.all(8.0),
                 child: FullButton(
-                  child: buttonContent(),
+                  child: Text(
+                    "Войти",
+                    style: TextStyle(color: Colors.white, fontSize: 20),
+                  ),
                   onPress: handleSubmit,
+                  load: loading,
                 ))
           ],
         ));

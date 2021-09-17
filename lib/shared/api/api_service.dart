@@ -27,15 +27,3 @@ class ApiService {
     return http.post(url, headers: {'Authorization': _authToken}, body: task);
   }
 }
-
-// {
-//   "_id": null,
-//   "type": "COMMON",
-//   "dateStart": "2021-09-16",
-//   "dateEnd": "2021-09-16",
-//   "employee": "UtbanovAG",
-//   "dtCreated": "2021-09-15T15:34:26.437Z",
-//   "approved": false,
-//   "attachment": null,
-//   "employeeCreated": "UtbanovAG"
-// }

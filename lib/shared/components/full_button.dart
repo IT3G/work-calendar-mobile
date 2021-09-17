@@ -1,14 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
 class FullButton extends StatelessWidget {
   final Widget child;
   final Function onPress;
+  bool load;
 
-  FullButton({Key? key, required this.child, required this.onPress})
+  FullButton(
+      {Key? key, required this.child, required this.onPress, this.load = false})
       : super(key: key);
 
   void handlePress() {
     onPress();
+  }
+
+  Widget buttonContent() {
+    if (load) {
+      return SpinKitWave(color: Colors.white, size: 24);
+    }
+
+    return child;
   }
 
   @override
@@ -23,7 +34,7 @@ class FullButton extends StatelessWidget {
         ),
         alignment: Alignment.center,
         padding: EdgeInsets.all(10),
-        child: child,
+        child: buttonContent(),
       ),
     );
   }

@@ -29,8 +29,13 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
   Map<String, String> selectedEventType = eventTypeNames[0];
   Map<String, dynamic> rangeDate = {};
   TextEditingController commentField = new TextEditingController();
+  bool loading = false;
 
   void createTask() async {
+    setState(() {
+      loading = true;
+    });
+
     try {
       Map<String, dynamic> data = {
         'dateStart': rangeDate['dateStart'],
@@ -46,7 +51,11 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
       print(response.body);
     } catch (error) {
       print(error);
-    } finally {}
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
   }
 
   void openEventTypes() {
@@ -144,6 +153,7 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   onPress: createTask,
+                  load: loading,
                 ),
               )
             ],
