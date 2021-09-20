@@ -48,6 +48,7 @@ class CalendarScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     fetchTasks();
     return Scaffold(
+        backgroundColor: Colors.white,
         appBar: CupertinoNavigationBar(
           middle: Text('Присутствие'),
           trailing: GestureDetector(

@@ -1,23 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/profile/profile_avatar.dart';
-import 'package:it2g_calendar_mobile/shared/components/avatar.dart';
+import 'package:it2g_calendar_mobile/shared/components/bordered_row.dart';
+import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
-import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
 
   ProfileScreen({Key? key, required this.user}) : super(key: key);
 
+  void openEditForm(BuildContext context) {
+    Navigator.of(context)
+        .push(ModalOverlay(title: "Редактировать", child: Text("")));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: CupertinoNavigationBar(
           middle: Text('Профиль'),
           trailing: GestureDetector(
-            onTap: () {},
+            onTap: () => openEditForm(context),
             child: Icon(
               Icons.edit,
               size: 25,
@@ -26,10 +32,47 @@ class ProfileScreen extends StatelessWidget {
       body: Column(
         children: [
           ProfileAvatar(login: user.mailNickname),
-          Text(
-            firstLastName(user.username),
-            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          Container(
+            margin: EdgeInsets.only(bottom: 30),
+            child: Text(
+              firstLastName(user.username),
+              style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.grey[700]),
+            ),
           ),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'email:',
+              children: [
+                Text(
+                  user.email.toLowerCase(),
+                  style: TextStyle(fontSize: 20),
+                )
+              ]),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'mattermost:',
+              children: [
+                Text('@${user.mailNickname}', style: TextStyle(fontSize: 20))
+              ]),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'Город:',
+              children: [Text(user.location, style: TextStyle(fontSize: 20))]),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'Офис: ',
+              children: [Text(user.location, style: TextStyle(fontSize: 20))]),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'День рождения:',
+              children: [Text(user.birthday, style: TextStyle(fontSize: 20))]),
+          BorderedRow(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              label: 'Позиция:',
+              children: [Text(user.position, style: TextStyle(fontSize: 20))])
         ],
       ),
     );
