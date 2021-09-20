@@ -23,3 +23,8 @@ User getUser(Map<String, dynamic>? data) {
       position: '',
       mailNickname: '');
 }
+
+String firstLastName(String fullname) {
+  List<String> partsName = fullname.split(' ');
+  return "${partsName[0]} ${partsName[1]}";
+}
