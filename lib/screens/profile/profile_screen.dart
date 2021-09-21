@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/profile/profile_avatar.dart';
+import 'package:it2g_calendar_mobile/screens/profile/profile_form.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
@@ -16,8 +17,11 @@ class ProfileScreen extends StatelessWidget {
       : super(key: key);
 
   void openEditForm(BuildContext context) {
-    Navigator.of(context)
-        .push(ModalOverlay(title: "Редактировать", child: Text("")));
+    Navigator.of(context).push(ModalOverlay(
+        title: "Редактировать",
+        child: ProfileForm(
+          user: user,
+        )));
   }
 
   void logout() {

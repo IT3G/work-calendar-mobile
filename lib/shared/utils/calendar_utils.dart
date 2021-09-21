@@ -35,7 +35,7 @@ List<CalendarEvent> getCalendarEvents(List<Task> tasks) {
     NamedEventType nameEvent = mapEventTypeToColoredData(task.type);
 
     CalendarEvent event = new CalendarEvent(
-        eventName: nameEvent.name,
+        eventName: '${nameEvent.name} | ${task.comment}',
         from: DateTime.parse(task.dateStart),
         to: DateTime.parse(task.dateEnd),
         background: nameEvent.color,
@@ -59,7 +59,7 @@ NamedEventType mapEventTypeToColoredData(String eventType) {
       return NamedEventType(name: "Отпуск", color: Colors.green);
   }
 
-  return NamedEventType(name: "Стандартно", color: Colors.white);
+  return NamedEventType(name: "Стандартно", color: Colors.grey.shade400);
 }
 
 Map<String, String> getTaskForSend(Map<String, dynamic> formData) {
