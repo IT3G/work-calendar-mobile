@@ -18,7 +18,7 @@ class LabledBox extends StatelessWidget {
             label.toUpperCase(),
             style: TextStyle(color: Colors.grey),
           ),
-          padding: EdgeInsets.only(left: 25, bottom: 10),
+          padding: EdgeInsets.only(left: 25, bottom: 7, top: 15),
         ),
         Container(
           width: MediaQuery.of(context).size.width,

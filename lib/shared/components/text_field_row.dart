@@ -5,8 +5,14 @@ class TextFieldRow extends StatelessWidget {
   final String? placehoder;
   final bool? hideBorder;
   final TextEditingController? controller;
+  final Widget? prefix;
 
-  TextFieldRow({Key? key, this.placehoder, this.hideBorder, this.controller})
+  TextFieldRow(
+      {Key? key,
+      this.placehoder,
+      this.hideBorder,
+      this.controller,
+      this.prefix})
       : super();
 
   int borderAlpha() {
@@ -20,6 +26,7 @@ class TextFieldRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
+      prefix: prefix,
       padding: EdgeInsets.all(10),
       controller: controller,
       placeholder: placehoder,
