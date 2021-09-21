@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 
-class BorderedRow extends StatelessWidget {
+class LabledRow extends StatelessWidget {
   final List<Widget> children;
   final String? label;
   final MainAxisAlignment? mainAxisAlignment;
+  final bool? hideBorder;
 
-  BorderedRow(
-      {Key? key, required this.children, this.label, this.mainAxisAlignment})
+  LabledRow(
+      {Key? key,
+      required this.children,
+      this.label,
+      this.mainAxisAlignment,
+      this.hideBorder = false})
       : super(key: key);
 
   void prepareChildren() {
@@ -15,9 +20,17 @@ class BorderedRow extends StatelessWidget {
           0,
           Text(
             label!,
-            style: TextStyle(color: Colors.grey, fontSize: 20),
+            style: TextStyle(fontSize: 18),
           ));
     }
+  }
+
+  int borderAlpha() {
+    if (hideBorder ?? hideBorder == true) {
+      return 0;
+    }
+
+    return 80;
   }
 
   @override
@@ -28,7 +41,8 @@ class BorderedRow extends StatelessWidget {
       padding: EdgeInsets.all(10),
       decoration: BoxDecoration(
           border: Border(
-              bottom: BorderSide(color: Colors.grey.withAlpha(80), width: 1))),
+              bottom: BorderSide(
+                  color: Colors.grey.withAlpha(borderAlpha()), width: 1))),
       child: Row(
         mainAxisAlignment: mainAxisAlignment != null
             ? mainAxisAlignment!
