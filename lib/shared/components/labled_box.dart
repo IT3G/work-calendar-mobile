@@ -21,6 +21,7 @@ class LabledBox extends StatelessWidget {
           padding: EdgeInsets.only(left: 25, bottom: 10),
         ),
         Container(
+          width: MediaQuery.of(context).size.width,
           padding: EdgeInsets.only(left: 15),
           decoration: BoxDecoration(
               color: Colors.white,

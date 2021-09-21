@@ -6,15 +6,23 @@ import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
+import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
+  final Function setAuthToken;
 
-  ProfileScreen({Key? key, required this.user}) : super(key: key);
+  ProfileScreen({Key? key, required this.user, required this.setAuthToken})
+      : super(key: key);
 
   void openEditForm(BuildContext context) {
     Navigator.of(context)
         .push(ModalOverlay(title: "Редактировать", child: Text("")));
+  }
+
+  void logout() {
+    removeAuthToken();
+    setAuthToken('');
   }
 
   @override
@@ -95,6 +103,18 @@ class ProfileScreen extends StatelessWidget {
                     ])
               ],
             ),
+          ),
+          LabledBox(
+            label: "",
+            child: Padding(
+                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                child: GestureDetector(
+                  onTap: logout,
+                  child: Text(
+                    "Выйти",
+                    style: TextStyle(color: Colors.red[300], fontSize: 18),
+                  ),
+                )),
           )
         ],
       ),
