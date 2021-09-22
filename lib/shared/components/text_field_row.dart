@@ -29,7 +29,7 @@ class TextFieldRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return CupertinoTextField(
       prefix: prefix,
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 15, bottom: 15, left: 10),
       controller: controller,
       placeholder: placehoder,
       style: TextStyle(fontSize: 18),

@@ -166,7 +166,7 @@ class ProfileScreen extends StatelessWidget {
           LabledBox(
             label: "",
             child: Padding(
-                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
+                padding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
                 child: GestureDetector(
                   onTap: logout,
                   child: Text(

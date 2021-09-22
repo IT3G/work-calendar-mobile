@@ -32,7 +32,7 @@ class LabledRow extends StatelessWidget {
     prepareChildren();
 
     return Container(
-      padding: EdgeInsets.all(10),
+      padding: EdgeInsets.only(top: 15, bottom: 15, right: 15),
       decoration: BoxDecoration(
           border: Border(
               bottom: BorderSide(
