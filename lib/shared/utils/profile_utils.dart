@@ -10,7 +10,9 @@ User getUser(Map<String, dynamic>? data) {
         location: data['location'],
         mattermost: data['mattermost'],
         position: data['position'],
-        mailNickname: data['mailNickname']);
+        mailNickname: data['mailNickname'],
+        skype: data['skype'] != null ? data['skype'] : '-',
+        telegram: data['telegram'] != null ? data['telegram'] : '-');
   }
 
   return new User(

@@ -33,6 +33,7 @@ class ProfileFormState extends State<ProfileForm> {
   final TextEditingController birthdayController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
   final TextEditingController skypeController = TextEditingController();
+  final TextEditingController telegramController = TextEditingController();
 
   bool loading = false;
 
@@ -47,7 +48,8 @@ class ProfileFormState extends State<ProfileForm> {
       'location': locationController.text,
       'birthday': birthdayController.text,
       'mattermost': mattermostController.text,
-      'skype': skypeController.text
+      'skype': skypeController.text,
+      'telegram': telegramController.text
     };
 
     try {
@@ -74,91 +76,105 @@ class ProfileFormState extends State<ProfileForm> {
     mattermostController.text = user.mattermost;
     birthdayController.text = user.birthday;
     locationController.text = user.location;
+    skypeController.text = user.skype;
+    telegramController.text = user.telegram;
   }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Form(
-        child: Column(
-          children: [
-            LabledBox(
-              label: 'Личные данные',
-              child: Column(
-                children: [
-                  TextFieldRow(
-                    controller: fullnameController,
-                    placehoder: 'ФИО',
+    return ListView(
+      children: [
+        Container(
+          child: Form(
+            child: Column(
+              children: [
+                LabledBox(
+                  label: 'Личные данные',
+                  child: Column(
+                    children: [
+                      TextFieldRow(
+                        controller: fullnameController,
+                        placehoder: 'ФИО',
+                      ),
+                      DateTimeField(
+                        hideBorder: true,
+                        controller: birthdayController,
+                        placehoder: "День рождения",
+                      )
+                    ],
                   ),
-                  DateTimeField(
-                    hideBorder: true,
-                    controller: birthdayController,
-                    placehoder: "День рождения",
-                  )
-                ],
-              ),
-            ),
-            LabledBox(
-              label: "Соц. сети",
-              child: Column(
-                children: [
-                  TextFieldRow(
-                    prefix: Icon(
-                      Icons.email,
-                      color: Colors.blueGrey[400],
-                    ),
-                    controller: emailController,
-                    placehoder: 'email',
-                  ),
-                  TextFieldRow(
-                    prefix: Icon(
-                      Icons.chat,
-                      color: Colors.blue[400],
-                    ),
-                    controller: mattermostController,
-                    placehoder: 'mattermost',
-                  ),
-                  TextFieldRow(
-                    prefix: Icon(
-                      CustomIcons.skype,
-                      color: Colors.blue[400],
-                    ),
-                    controller: skypeController,
-                    hideBorder: true,
-                    placehoder: 'skype',
-                  ),
-                ],
-              ),
-            ),
-            LabledBox(
-              label: "Локация",
-              child: Column(
-                children: [
-                  TextFieldRow(
-                    hideBorder: true,
-                    prefix: Icon(
-                      Icons.location_on,
-                      color: Colors.red[200],
-                    ),
-                    controller: locationController,
-                  )
-                ],
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(left: 10, right: 10, top: 25),
-              child: FullButton(
-                load: loading,
-                child: Text(
-                  "Сохранить",
-                  style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
-                onPress: editProfile,
-              ),
-            )
-          ],
-        ),
-      ),
+                LabledBox(
+                  label: "Соц. сети",
+                  child: Column(
+                    children: [
+                      TextFieldRow(
+                        prefix: Icon(
+                          Icons.email,
+                          color: Colors.blueGrey[400],
+                        ),
+                        controller: emailController,
+                        placehoder: 'email',
+                      ),
+                      TextFieldRow(
+                        prefix: Icon(
+                          Icons.chat,
+                          color: Colors.blue[400],
+                        ),
+                        controller: mattermostController,
+                        placehoder: 'mattermost',
+                      ),
+                      TextFieldRow(
+                        prefix: Icon(
+                          CustomIcons.skype,
+                          color: Colors.blue[400],
+                        ),
+                        controller: skypeController,
+                        placehoder: 'skype',
+                      ),
+                      TextFieldRow(
+                        prefix: Icon(
+                          CustomIcons.telegram_plane,
+                          color: Colors.blue[400],
+                        ),
+                        controller: telegramController,
+                        hideBorder: true,
+                        placehoder: 'telegram',
+                      ),
+                    ],
+                  ),
+                ),
+                LabledBox(
+                  label: "Локация",
+                  child: Column(
+                    children: [
+                      TextFieldRow(
+                        hideBorder: true,
+                        prefix: Icon(
+                          Icons.location_on,
+                          color: Colors.red[200],
+                        ),
+                        controller: locationController,
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: EdgeInsets.only(left: 10, right: 10, top: 25),
+                  child: FullButton(
+                    load: loading,
+                    child: Text(
+                      "Сохранить",
+                      style: TextStyle(color: Colors.white, fontSize: 18),
+                    ),
+                    onPress: editProfile,
+                  ),
+                )
+              ],
+            ),
+          ),
+        )
+      ],
     );
   }
 }

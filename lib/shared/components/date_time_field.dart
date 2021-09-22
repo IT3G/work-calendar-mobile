@@ -84,7 +84,9 @@ class DateTimeField extends StatelessWidget {
 
   void handleTap(BuildContext context) {
     openDateTime(context);
-    onTap ?? onTap!();
+    if (onTap != null) {
+      onTap!();
+    }
   }
 
   @override

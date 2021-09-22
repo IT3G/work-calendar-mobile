@@ -8,6 +8,9 @@ class User {
   final String id;
   final String mailNickname;
 
+  final String skype;
+  final String telegram;
+
   User(
       {required this.id,
       required this.username,
@@ -16,7 +19,9 @@ class User {
       required this.location,
       required this.mattermost,
       required this.position,
-      required this.mailNickname});
+      required this.mailNickname,
+      this.skype = '',
+      this.telegram = ''});
 }
 
 // hasMailing: true

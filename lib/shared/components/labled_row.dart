@@ -2,27 +2,21 @@ import 'package:flutter/material.dart';
 
 class LabledRow extends StatelessWidget {
   final List<Widget> children;
-  final String? label;
+  final Widget label;
+
   final MainAxisAlignment? mainAxisAlignment;
   final bool? hideBorder;
 
   LabledRow(
       {Key? key,
       required this.children,
-      this.label,
       this.mainAxisAlignment,
+      this.label = const Text(""),
       this.hideBorder = false})
       : super(key: key);
 
   void prepareChildren() {
-    if (label != null) {
-      children.insert(
-          0,
-          Text(
-            label!,
-            style: TextStyle(fontSize: 18),
-          ));
-    }
+    children.insert(0, label);
   }
 
   int borderAlpha() {

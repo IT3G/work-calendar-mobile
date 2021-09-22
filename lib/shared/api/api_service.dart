@@ -1,7 +1,6 @@
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
-import 'package:it2g_calendar_mobile/shared/models/task.dart';
 
 class ApiService {
   static String _authToken = "";

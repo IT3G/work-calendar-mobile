@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/presentation/custom_icons_icons.dart';
 import 'package:it2g_calendar_mobile/screens/profile/profile_avatar.dart';
 import 'package:it2g_calendar_mobile/screens/profile/profile_form.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
@@ -41,14 +42,19 @@ class ProfileScreen extends StatelessWidget {
               size: 25,
             ),
           )),
-      body: Column(
+      body: ListView(
+        padding: EdgeInsets.only(bottom: 140),
         children: [
           ProfileAvatar(login: user.mailNickname),
           Container(
             margin: EdgeInsets.only(bottom: 30),
+            alignment: Alignment.center,
             child: Text(
               firstLastName(user.username),
-              style: TextStyle(fontSize: 20, color: Colors.grey[800]),
+              style: TextStyle(
+                fontSize: 20,
+                color: Colors.grey[800],
+              ),
             ),
           ),
           LabledBox(
@@ -57,24 +63,10 @@ class ProfileScreen extends StatelessWidget {
               children: [
                 LabledRow(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'email:',
-                    children: [
-                      Text(
-                        user.email.toLowerCase(),
-                        style: TextStyle(fontSize: 18, color: Colors.grey[700]),
-                      )
-                    ]),
-                LabledRow(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'mattermost:',
-                    children: [
-                      Text('@${user.mailNickname}',
-                          style:
-                              TextStyle(fontSize: 18, color: Colors.grey[700]))
-                    ]),
-                LabledRow(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'Город:',
+                    label: Text(
+                      'Город',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     children: [
                       Text(user.location,
                           style:
@@ -82,7 +74,10 @@ class ProfileScreen extends StatelessWidget {
                     ]),
                 LabledRow(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'Офис: ',
+                    label: Text(
+                      'Офис',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     children: [
                       Text(user.location,
                           style:
@@ -90,7 +85,10 @@ class ProfileScreen extends StatelessWidget {
                     ]),
                 LabledRow(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'День рождения:',
+                    label: Text(
+                      'День рождения',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     children: [
                       Text(user.birthday,
                           style:
@@ -99,12 +97,69 @@ class ProfileScreen extends StatelessWidget {
                 LabledRow(
                     hideBorder: true,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    label: 'Позиция:',
+                    label: Text(
+                      'Позиция',
+                      style: TextStyle(fontSize: 18),
+                    ),
                     children: [
                       Text(user.position,
                           style:
                               TextStyle(fontSize: 18, color: Colors.grey[700]))
                     ])
+              ],
+            ),
+          ),
+          LabledBox(
+            label: "Соц. сети",
+            child: Column(
+              children: [
+                LabledRow(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    label: Icon(
+                      Icons.email,
+                      color: Colors.blueGrey[400],
+                    ),
+                    children: [
+                      Text(
+                        user.email.toLowerCase(),
+                        style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                      )
+                    ]),
+                LabledRow(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    label: Icon(
+                      Icons.message,
+                      color: Colors.blue[400],
+                    ),
+                    children: [
+                      Text('@${user.mailNickname}',
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.grey[700]))
+                    ]),
+                LabledRow(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    label: Icon(
+                      CustomIcons.skype,
+                      color: Colors.blue[400],
+                    ),
+                    children: [
+                      Text(
+                        user.skype,
+                        style: TextStyle(fontSize: 18, color: Colors.grey[700]),
+                      )
+                    ]),
+                LabledRow(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    label: Icon(
+                      CustomIcons.telegram_plane,
+                      color: Colors.blue[400],
+                    ),
+                    hideBorder: true,
+                    children: [
+                      Text(user.telegram,
+                          style:
+                              TextStyle(fontSize: 18, color: Colors.grey[700]))
+                    ]),
               ],
             ),
           ),
