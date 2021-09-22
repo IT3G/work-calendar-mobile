@@ -6,7 +6,7 @@ import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
-import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
+import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class ProfileScreen extends StatelessWidget {

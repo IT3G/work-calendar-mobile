@@ -28,3 +28,7 @@ String firstLastName(String fullname) {
   List<String> partsName = fullname.split(' ');
   return "${partsName[0]} ${partsName[1]}";
 }
+
+Map<String, String> getProfileForSend(Map<String, String> formData) {
+  return {};
+}

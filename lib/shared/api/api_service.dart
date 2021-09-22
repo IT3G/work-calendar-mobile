@@ -26,4 +26,9 @@ class ApiService {
 
     return http.post(url, headers: {'Authorization': _authToken}, body: task);
   }
+
+  static Future<Response> editProfile(String login, Map<String, String> data) {
+    Uri url = Uri.parse('${ApiUrls.login}/$login');
+    return http.post(url, headers: {'Authorization': _authToken}, body: data);
+  }
 }

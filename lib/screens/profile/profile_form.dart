@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/presentation/custom_icons_icons.dart';
+import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/date_time_field.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
@@ -27,6 +29,33 @@ class ProfileFormState extends State<ProfileForm> {
 
   final TextEditingController birthdayController = TextEditingController();
   final TextEditingController locationController = TextEditingController();
+  final TextEditingController skypeController = TextEditingController();
+
+  bool loading = false;
+
+  void editProfile() async {
+    setState(() {
+      loading = true;
+    });
+
+    Map<String, String> data = {
+      'username': fullnameController.text,
+      'email': emailController.text,
+      'location': locationController.text,
+      'birthday': birthdayController.text,
+      'mattermost': mattermostController.text
+    };
+
+    try {
+      await ApiService.editProfile(user.mailNickname, data);
+    } catch (error) {
+      print(error);
+    } finally {
+      setState(() {
+        loading = false;
+      });
+    }
+  }
 
   @override
   void initState() {
@@ -79,8 +108,16 @@ class ProfileFormState extends State<ProfileForm> {
                       color: Colors.blue[400],
                     ),
                     controller: mattermostController,
-                    hideBorder: true,
                     placehoder: 'mattermost',
+                  ),
+                  TextFieldRow(
+                    prefix: Icon(
+                      CustomIcons.skype,
+                      color: Colors.blue[400],
+                    ),
+                    controller: skypeController,
+                    hideBorder: true,
+                    placehoder: 'skype',
                   ),
                 ],
               ),
@@ -103,6 +140,7 @@ class ProfileFormState extends State<ProfileForm> {
             Padding(
               padding: EdgeInsets.only(left: 10, right: 10, top: 25),
               child: FullButton(
+                load: loading,
                 child: Text(
                   "Сохранить",
                   style: TextStyle(color: Colors.white, fontSize: 18),

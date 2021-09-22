@@ -1,4 +1,4 @@
-import 'package:it2g_calendar_mobile/shared/utils/profile_state.dart';
+import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_reducer.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_state.dart';
 import 'package:it2g_calendar_mobile/store/profile/profile_reducer.dart';
