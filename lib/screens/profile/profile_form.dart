@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/presentation/custom_icons_icons.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/date_time_field.dart';
@@ -43,11 +46,16 @@ class ProfileFormState extends State<ProfileForm> {
       'email': emailController.text,
       'location': locationController.text,
       'birthday': birthdayController.text,
-      'mattermost': mattermostController.text
+      'mattermost': mattermostController.text,
+      'skype': skypeController.text
     };
 
     try {
-      await ApiService.editProfile(user.mailNickname, data);
+      Response response = await ApiService.editProfile(user.mailNickname, data);
+      if (response.statusCode != 201) {
+        throw new HttpException('${response.statusCode}');
+      }
+      Navigator.pop(context);
     } catch (error) {
       print(error);
     } finally {
@@ -145,7 +153,7 @@ class ProfileFormState extends State<ProfileForm> {
                   "Сохранить",
                   style: TextStyle(color: Colors.white, fontSize: 18),
                 ),
-                onPress: () {},
+                onPress: editProfile,
               ),
             )
           ],
