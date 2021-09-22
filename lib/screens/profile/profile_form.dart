@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/shared/components/date_time_field.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
 import 'package:it2g_calendar_mobile/shared/components/text_field_row.dart';
@@ -52,11 +53,11 @@ class ProfileFormState extends State<ProfileForm> {
                     controller: fullnameController,
                     placehoder: 'ФИО',
                   ),
-                  TextFieldRow(
+                  DateTimeField(
                     hideBorder: true,
                     controller: birthdayController,
-                    placehoder: 'День рождения',
-                  ),
+                    placehoder: "День рождения",
+                  )
                 ],
               ),
             ),

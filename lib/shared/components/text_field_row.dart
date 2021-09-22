@@ -6,13 +6,15 @@ class TextFieldRow extends StatelessWidget {
   final bool? hideBorder;
   final TextEditingController? controller;
   final Widget? prefix;
+  final Function()? onTap;
 
   TextFieldRow(
       {Key? key,
       this.placehoder,
       this.hideBorder,
       this.controller,
-      this.prefix})
+      this.prefix,
+      this.onTap})
       : super();
 
   int borderAlpha() {
@@ -31,6 +33,7 @@ class TextFieldRow extends StatelessWidget {
       controller: controller,
       placeholder: placehoder,
       style: TextStyle(fontSize: 18),
+      onTap: onTap,
       decoration: BoxDecoration(
           border: Border(
               bottom: BorderSide(color: Colors.grey.withAlpha(borderAlpha())))),
