@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/shared/components/text_field_row.dart';
+import 'package:it2g_calendar_mobile/shared/extensions/date_time.dart';
 
 class DateTimeField extends StatelessWidget {
   final String? placehoder;
@@ -8,6 +9,7 @@ class DateTimeField extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? prefix;
   final Function()? onTap;
+  final CupertinoDatePickerMode mode;
 
   DateTimeField(
       {Key? key,
@@ -15,8 +17,18 @@ class DateTimeField extends StatelessWidget {
       this.hideBorder,
       this.controller,
       this.prefix,
-      this.onTap})
+      this.onTap,
+      this.mode = CupertinoDatePickerMode.date})
       : super();
+  void handleCancle(BuildContext context) {
+    Navigator.pop(context);
+  }
+
+  void handleChange(DateTime date) {
+    if (controller != null) {
+      controller!.text = date.getDateWithoutTime();
+    }
+  }
 
   openDateTime(BuildContext context) {
     showCupertinoDialog(
@@ -60,7 +72,9 @@ class DateTimeField extends StatelessWidget {
                     Container(
                       color: Colors.white,
                       height: 300,
-                      child: CupertinoDatePicker(onDateTimeChanged: (date) {}),
+                      child: CupertinoDatePicker(
+                          mode: CupertinoDatePickerMode.date,
+                          onDateTimeChanged: handleChange),
                     )
                   ],
                 ),
