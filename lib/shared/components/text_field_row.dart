@@ -7,6 +7,7 @@ class TextFieldRow extends StatelessWidget {
   final TextEditingController? controller;
   final Widget? prefix;
   final Function()? onTap;
+  final bool? enabled;
 
   TextFieldRow(
       {Key? key,
@@ -14,7 +15,8 @@ class TextFieldRow extends StatelessWidget {
       this.hideBorder,
       this.controller,
       this.prefix,
-      this.onTap})
+      this.onTap,
+      this.enabled})
       : super();
 
   int borderAlpha() {
@@ -28,6 +30,7 @@ class TextFieldRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CupertinoTextField(
+      enabled: enabled,
       prefix: prefix,
       padding: EdgeInsets.only(top: 15, bottom: 15, left: 10),
       controller: controller,
