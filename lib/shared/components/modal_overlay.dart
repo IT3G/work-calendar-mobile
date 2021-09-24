@@ -8,58 +8,44 @@ class ModalOverlay extends ModalRoute {
   ModalOverlay({required this.child, required this.title}) : super();
 
   @override
-  Duration get transitionDuration => Duration(milliseconds: 200);
+  Color? get barrierColor => Colors.grey.shade50;
 
   @override
-  bool get opaque => false;
+  String? get barrierLabel => null;
 
   @override
   bool get barrierDismissible => false;
 
   @override
-  Color get barrierColor => Colors.white;
-
-  @override
-  String get barrierLabel => '';
+  Curve get barrierCurve => super.barrierCurve;
 
   @override
   bool get maintainState => true;
 
   @override
-  Widget buildPage(
-    BuildContext context,
-    Animation<double> animation,
-    Animation<double> secondaryAnimation,
-  ) {
-    // This makes sure that text and other content follows the material style
-    return Material(
-      type: MaterialType.transparency,
-      // make sure that the overlay content is not cut off
-      child: SafeArea(
-        child: _buildOverlayContent(context),
-      ),
-    );
-  }
+  bool get opaque => true;
 
-  Widget _buildOverlayContent(BuildContext context) {
-    return Scaffold(
+  @override
+  Duration get transitionDuration => Duration(milliseconds: 150);
+
+  @override
+  Widget buildPage(BuildContext context, Animation<double> animation,
+      Animation<double> secondaryAnimation) {
+    return SafeArea(
+        child: Scaffold(
       appBar: CupertinoNavigationBar(
         middle: Text(title),
       ),
       body: Container(child: child),
-    );
+    ));
   }
 
   @override
   Widget buildTransitions(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation, Widget child) {
-    // You can add your own animations for the overlay content
     return FadeTransition(
       opacity: animation,
-      child: ScaleTransition(
-        scale: animation,
-        child: child,
-      ),
+      child: child,
     );
   }
 }
