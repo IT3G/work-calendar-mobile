@@ -1,12 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/constants/calendar_const.dart';
-import 'package:it2g_calendar_mobile/shared/models/task.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
+import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
 import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 class EmployeeCalendarForm extends StatefulWidget {
@@ -47,7 +46,8 @@ class EmployeeCalendarFormState extends State<EmployeeCalendarForm> {
 
       Map<String, String> task = getTaskForSend(data);
 
-      Response response = await ApiService.setTaskEmployee(task);
+      await ApiService.setTaskEmployee(task);
+      StoreFetchService.fetchTasks(user.mailNickname);
       Navigator.pop(context);
     } catch (error) {
       print(error);

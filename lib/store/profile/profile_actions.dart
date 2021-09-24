@@ -17,3 +17,9 @@ class SetUserDataAction {
 
   SetUserDataAction(this.payload);
 }
+
+class SetLoadingProfileAction {
+  final bool loading;
+
+  SetLoadingProfileAction(this.loading);
+}

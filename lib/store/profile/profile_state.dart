@@ -4,9 +4,11 @@ class ProfileState {
   final String authToken;
   final String refreshToken;
   final User user;
+  final bool loading;
 
   ProfileState(
       {required this.authToken,
       required this.refreshToken,
-      required this.user});
+      required this.user,
+      required this.loading});
 }

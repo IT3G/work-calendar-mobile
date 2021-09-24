@@ -26,14 +26,20 @@ AppState updateState(AppState state, partState) {
 
   return new AppState(
       profileState: new ProfileState(
-          authToken: getAuthToken(), refreshToken: '', user: getUser(null)),
-      calendarState: new CalendarState(tasks: []));
+          authToken: getAuthToken(),
+          refreshToken: '',
+          user: getUser(null),
+          loading: false),
+      calendarState: new CalendarState(tasks: [], loading: false));
 }
 
 AppState initialState = new AppState(
     profileState: new ProfileState(
-        authToken: getAuthToken(), refreshToken: '', user: getUser(null)),
-    calendarState: new CalendarState(tasks: []));
+        authToken: getAuthToken(),
+        refreshToken: '',
+        user: getUser(null),
+        loading: false),
+    calendarState: new CalendarState(tasks: [], loading: false));
 
 Reducer<AppState> reducers = combineReducers([profileReducer, calendarReducer]);
 

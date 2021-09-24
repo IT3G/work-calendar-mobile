@@ -4,3 +4,8 @@ class SetTasksAction {
   final List<Task> payload;
   SetTasksAction(this.payload);
 }
+
+class SetLoadingCalendarAction {
+  final bool payload;
+  SetLoadingCalendarAction(this.payload);
+}

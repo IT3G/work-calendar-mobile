@@ -10,6 +10,7 @@ import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
+import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
 
 import 'employee_calendar_form.dart';
 
@@ -23,16 +24,9 @@ class CalendarScreen extends StatelessWidget {
       required this.tasks,
       required this.setTasks,
       required this.user})
-      : super(key: key);
-
-  void fetchTasks() async {
-    try {
-      Response response = await ApiService.tasksEmployee(user.mailNickname);
-      dynamic data = jsonDecode(response.body);
-      final tasks = getTasks(data);
-      setTasks(tasks);
-    } catch (error) {
-      print(error);
+      : super(key: key) {
+    if (tasks.length == 0) {
+      StoreFetchService.fetchTasks(user.mailNickname);
     }
   }
 
@@ -46,7 +40,7 @@ class CalendarScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    fetchTasks();
+    // fetchTasks();
     return Scaffold(
         backgroundColor: Colors.white,
         appBar: CupertinoNavigationBar(

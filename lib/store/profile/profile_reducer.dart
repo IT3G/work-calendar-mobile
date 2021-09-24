@@ -15,7 +15,8 @@ AppState setAuthToken(AppState state, action) {
       new ProfileState(
           authToken: action.payload,
           refreshToken: state.profileState.refreshToken,
-          user: state.profileState.user));
+          user: state.profileState.user,
+          loading: state.profileState.loading));
 }
 
 AppState setRefreshToken(AppState state, action) {
@@ -24,7 +25,8 @@ AppState setRefreshToken(AppState state, action) {
       new ProfileState(
           authToken: state.profileState.authToken,
           refreshToken: action.payload,
-          user: state.profileState.user));
+          user: state.profileState.user,
+          loading: state.profileState.loading));
 }
 
 AppState setUserData(AppState state, action) {
@@ -33,11 +35,23 @@ AppState setUserData(AppState state, action) {
       new ProfileState(
           authToken: state.profileState.authToken,
           refreshToken: state.profileState.refreshToken,
-          user: action.payload));
+          user: action.payload,
+          loading: state.profileState.loading));
+}
+
+AppState setLoadingProfile(AppState state, action) {
+  return updateState(
+      state,
+      new ProfileState(
+          authToken: state.profileState.authToken,
+          refreshToken: state.profileState.refreshToken,
+          user: state.profileState.user,
+          loading: state.profileState.loading));
 }
 
 Reducer<AppState> profileReducer = combineReducers([
   new TypedReducer<AppState, SetAuthTokenAction>(setAuthToken),
   new TypedReducer<AppState, SetRefreshTokenAction>(setRefreshToken),
-  new TypedReducer<AppState, SetUserDataAction>(setUserData)
+  new TypedReducer<AppState, SetUserDataAction>(setUserData),
+  new TypedReducer<AppState, SetLoadingProfileAction>(setLoadingProfile)
 ]);
