@@ -55,6 +55,7 @@ class ProfileFormState extends State<ProfileForm> {
 
     try {
       Response response = await ApiService.editProfile(user.mailNickname, data);
+      StoreFetchService.fetchProfile(user.mailNickname);
       if (response.statusCode != 201) {
         throw new HttpException('${response.statusCode}');
       }

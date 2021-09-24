@@ -33,7 +33,7 @@ class StoreFetchService {
     try {
       Response response = await ApiService.getProfile(login);
       dynamic data = jsonDecode(response.body);
-      User user = getUser(data['user']);
+      User user = getUser(data);
       _store.dispatch(SetUserDataAction(user));
     } catch (error) {
       print(error);
