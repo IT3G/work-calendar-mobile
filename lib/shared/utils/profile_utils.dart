@@ -5,14 +5,14 @@ User getUser(Map<String, dynamic>? data) {
     return new User(
         id: data['_id'],
         username: data['username'],
-        birthday: data['birthday'],
-        email: data['email'],
-        location: data['location'],
-        mattermost: data['mattermost'],
-        position: data['position'],
-        mailNickname: data['mailNickname'],
-        skype: data['skype'] != null ? data['skype'] : '-',
-        telegram: data['telegram'] != null ? data['telegram'] : '-');
+        birthday: data['birthday'] ?? '',
+        email: data['email'] ?? '',
+        location: data['location'] ?? '',
+        mattermost: data['mattermost'] ?? '',
+        position: data['position'] ?? '',
+        mailNickname: data['mailNickname'] ?? '',
+        skype: data['skype'] ?? '-',
+        telegram: data['telegram'] ?? '-');
   }
 
   return new User(
