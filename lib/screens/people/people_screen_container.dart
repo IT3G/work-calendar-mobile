@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_screen.dart';
 import 'package:it2g_calendar_mobile/store/people/people_map.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
+import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
 
 class PeopleScreenContainer extends StatelessWidget {
   @override

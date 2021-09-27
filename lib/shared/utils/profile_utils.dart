@@ -1,6 +1,6 @@
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 
-User getUser(Map<String, dynamic>? data) {
+User parseUser(Map<String, dynamic>? data) {
   if (data is Map<String, dynamic>) {
     return new User(
         id: data['_id'],
@@ -24,6 +24,17 @@ User getUser(Map<String, dynamic>? data) {
       mattermost: '',
       position: '',
       mailNickname: '');
+}
+
+List<User> parseUsers(List<dynamic> data) {
+  List<User> users = [];
+
+  for (dynamic userData in data) {
+    User user = parseUser(userData);
+    users.add(user);
+  }
+
+  return users;
 }
 
 String firstLastName(String fullname) {

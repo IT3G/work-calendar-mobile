@@ -35,4 +35,9 @@ class ApiService {
     Uri url = Uri.parse('${ApiUrls.login}/$login');
     return http.post(url, headers: {'Authorization': _authToken}, body: data);
   }
+
+  static Future<Response> getUsers() {
+    Uri url = Uri.parse(ApiUrls.users);
+    return http.get(url, headers: {'Authorization': _authToken});
+  }
 }

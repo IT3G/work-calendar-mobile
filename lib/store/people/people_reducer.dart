@@ -14,7 +14,7 @@ AppState setPeopleLoading(AppState state, action) {
   return updateState(
       state,
       new PeopleState(
-          people: state.peopleState.people, loading: action.paylaod));
+          people: state.peopleState.people, loading: action.payload));
 }
 
 Reducer<AppState> peopleReducer = combineReducers([

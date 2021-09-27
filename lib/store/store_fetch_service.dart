@@ -6,6 +6,7 @@ import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_actions.dart';
+import 'package:it2g_calendar_mobile/store/people/people_actions.dart';
 import 'package:it2g_calendar_mobile/store/profile/profile_actions.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
@@ -33,12 +34,26 @@ class StoreFetchService {
     try {
       Response response = await ApiService.getProfile(login);
       dynamic data = jsonDecode(response.body);
-      User user = getUser(data);
+      User user = parseUser(data);
       _store.dispatch(SetUserDataAction(user));
     } catch (error) {
       print(error);
     } finally {
       _store.dispatch(SetLoadingProfileAction(false));
+    }
+  }
+
+  static fetchUsers() async {
+    _store.dispatch(SetPeopleLoadingAction(true));
+
+    print('LOAD users');
+    try {
+      Response response = await ApiService.getUsers();
+      print(response.body);
+    } catch (error) {
+      print(error);
+    } finally {
+      _store.dispatch(SetPeopleLoadingAction(false));
     }
   }
 }

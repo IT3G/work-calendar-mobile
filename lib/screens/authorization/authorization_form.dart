@@ -55,7 +55,7 @@ class AuthorizationFormState extends State<AuthorizationForm> {
           await ApiService.login(login: login, password: password);
       Map<String, dynamic> data = jsonDecode(response.body);
 
-      setUserData(getUser(data['user']));
+      setUserData(parseUser(data['user']));
       setAuthToken(data['accessToken']);
       setRefreshToken(data['refreshToken']);
     } catch (error) {

@@ -24,7 +24,7 @@ AppState initialState = new AppState(
     profileState: new ProfileState(
         authToken: getAuthToken(),
         refreshToken: '',
-        user: getUser(null),
+        user: parseUser(null),
         loading: false),
     calendarState: new CalendarState(tasks: [], loading: false));
 
@@ -41,6 +41,13 @@ AppState updateState(AppState state, partState) {
         peopleState: state.peopleState,
         profileState: state.profileState,
         calendarState: partState);
+  }
+
+  if (partState is PeopleState) {
+    return new AppState(
+        peopleState: partState,
+        profileState: state.profileState,
+        calendarState: state.calendarState);
   }
 
   return initialState;
