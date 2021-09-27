@@ -46,10 +46,12 @@ class StoreFetchService {
   static fetchUsers() async {
     _store.dispatch(SetPeopleLoadingAction(true));
 
-    print('LOAD users');
     try {
       Response response = await ApiService.getUsers();
-      print(response.body);
+      dynamic data = jsonDecode(response.body);
+      List<User> users = parseUsers(data);
+      print(users);
+      _store.dispatch(SetPeopleAction(users));
     } catch (error) {
       print(error);
     } finally {

@@ -1,27 +1,19 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_redux/flutter_redux.dart';
+import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
+import 'package:it2g_calendar_mobile/screens/people/people_list_container.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
+import 'package:it2g_calendar_mobile/store/people/people_map.dart';
+import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
 
 class PeopleScreen extends StatefulWidget {
-  final List<User> people;
-  final bool loading;
-
-  PeopleScreen({Key? key, required this.people, required this.loading})
-      : super(key: key);
-
   @override
-  PeopleScreenState createState() =>
-      new PeopleScreenState(people: people, loading: loading);
+  PeopleScreenState createState() => new PeopleScreenState();
 }
 
 class PeopleScreenState extends State<PeopleScreen> {
-  final List<User> people;
-  final bool loading;
-
-  PeopleScreenState({Key? key, required this.people, required this.loading})
-      : super();
-
   @override
   void initState() {
     super.initState();
@@ -31,10 +23,9 @@ class PeopleScreenState extends State<PeopleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CupertinoNavigationBar(
-        middle: Text("Коллеги"),
-      ),
-      body: Container(),
-    );
+        appBar: CupertinoNavigationBar(
+          middle: Text("Коллеги"),
+        ),
+        body: PeopleListContainer());
   }
 }

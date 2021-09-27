@@ -21,6 +21,11 @@ class AvatarState extends State<Avatar> {
     return ClipRRect(
       child: Image(
         image: NetworkImage(avatarUrl(login)),
+        errorBuilder: (context, error, stackTrace) => Container(
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey[200]),
+            child: Icon(Icons.person, color: Colors.blueGrey)),
       ),
       borderRadius: BorderRadius.circular(200),
     );
