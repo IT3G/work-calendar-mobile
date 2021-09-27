@@ -7,5 +7,6 @@ class ApiUrls {
   static final String tasksEmployee = '$baseUrl/tasks/tasks-employee/';
   static final String tasks = '$baseUrl/tasks';
   static final String avatar = '$baseUrl/avatar';
+  static final String users = '$baseUrl/users';
   static final String login = '$baseUrl/users/login';
 }
