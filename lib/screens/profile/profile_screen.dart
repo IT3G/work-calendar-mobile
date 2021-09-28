@@ -43,6 +43,7 @@ class ProfileScreen extends StatelessWidget {
         padding: EdgeInsets.only(bottom: 140),
         children: [
           UserDataBlock(
+            showCalendarButton: false,
             user: user,
           ),
           LabledBox(

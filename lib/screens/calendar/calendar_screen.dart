@@ -1,15 +1,10 @@
-import 'dart:convert';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
-import 'package:it2g_calendar_mobile/screens/calendar/employee_calendar.dart';
+import 'package:it2g_calendar_mobile/shared/components/employee_calendar.dart';
 import 'package:it2g_calendar_mobile/screens/calendar/employee_tasks_list.dart';
-import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
-import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
 import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
 
 import 'employee_calendar_form.dart';
