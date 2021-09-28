@@ -1,12 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:it2g_calendar_mobile/screens/people/people_filters_screen.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list_container.dart';
+import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/store/people/people_map.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 class PeopleScreen extends StatefulWidget {
   @override
@@ -14,7 +17,7 @@ class PeopleScreen extends StatefulWidget {
 }
 
 class PeopleScreenState extends State<PeopleScreen> {
-  bool showNavBorder = true;
+  bool showNavBorder = false;
 
   @override
   void initState() {
@@ -28,10 +31,19 @@ class PeopleScreenState extends State<PeopleScreen> {
     });
   }
 
+  void openFilters(BuildContext context) {
+    Navigator.of(context)
+        .push(ModalOverlay(title: "Фильтр", child: PeopleFiltersScreen()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CupertinoNavigationBar(
+          trailing: GestureDetector(
+            onTap: () => openFilters(context),
+            child: Icon(Icons.filter_list_outlined),
+          ),
           border: Border(
               bottom: BorderSide(
                   width: 0,
