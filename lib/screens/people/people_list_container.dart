@@ -5,11 +5,18 @@ import 'package:it2g_calendar_mobile/store/people/people_map.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 
 class PeopleListContainer extends StatelessWidget {
+  final Function onScroll;
+
+  PeopleListContainer({Key? key, required this.onScroll}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PeopleStateMap>(
-        builder: (context, mapState) =>
-            PeopleList(people: mapState.people, loading: mapState.loading),
+        builder: (context, mapState) => PeopleList(
+              people: mapState.people,
+              loading: mapState.loading,
+              onScroll: onScroll,
+            ),
         converter: getPeopleStateMap);
   }
 }

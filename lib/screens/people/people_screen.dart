@@ -14,18 +14,32 @@ class PeopleScreen extends StatefulWidget {
 }
 
 class PeopleScreenState extends State<PeopleScreen> {
+  bool showNavBorder = true;
+
   @override
   void initState() {
     super.initState();
     StoreFetchService.fetchUsers();
   }
 
+  void handleScrollPeopleList(double offset) {
+    setState(() {
+      showNavBorder = offset > 77;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CupertinoNavigationBar(
+          border: Border(
+              bottom: BorderSide(
+                  width: 0,
+                  color: showNavBorder ? Colors.grey : Colors.grey.shade100)),
           middle: Text("Коллеги"),
         ),
-        body: PeopleListContainer());
+        body: PeopleListContainer(
+          onScroll: handleScrollPeopleList,
+        ));
   }
 }
