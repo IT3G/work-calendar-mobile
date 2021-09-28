@@ -16,7 +16,11 @@ class FullButton extends StatelessWidget {
 
   Widget buttonContent() {
     if (load) {
-      return SpinKitWave(color: Colors.white, size: 24);
+      return SpinKitDualRing(
+        color: Colors.white,
+        size: 24,
+        lineWidth: 3,
+      );
     }
 
     return child;
