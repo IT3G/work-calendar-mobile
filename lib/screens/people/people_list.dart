@@ -2,8 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/shared/components/avatar.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
+import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
+import 'package:it2g_calendar_mobile/shared/components/user_data_block.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 
 class PeopleList extends StatelessWidget {
   final List<User> people;
@@ -17,10 +20,22 @@ class PeopleList extends StatelessWidget {
       required this.onScroll})
       : super(key: key);
 
-  ScrollController scrollController = new ScrollController();
+  final ScrollController scrollController = new ScrollController();
 
   void handleScroll() {
     onScroll(scrollController.offset);
+  }
+
+  void openUserCard(BuildContext context, User user) {
+    Navigator.of(context).push(ModalOverlay(
+        child: ListView(
+          children: [
+            UserDataBlock(
+              user: user,
+            ),
+          ],
+        ),
+        title: firstLastName(user.username)));
   }
 
   @override
@@ -61,21 +76,27 @@ class PeopleList extends StatelessWidget {
         ),
         for (User user in people)
           Padding(
-            padding: EdgeInsets.only(left: 10),
-            child: LabledRow(
-              children: [
-                Container(
-                  height: 40,
-                  width: 40,
-                  margin: EdgeInsets.only(right: 20),
-                  child: Avatar(login: user.mailNickname),
+              padding: EdgeInsets.only(left: 10),
+              child: GestureDetector(
+                onTap: () => openUserCard(context, user),
+                child: LabledRow(
+                  children: [
+                    Container(
+                      height: 40,
+                      width: 40,
+                      margin: EdgeInsets.only(right: 20),
+                      child: Avatar(login: user.mailNickname),
+                    ),
+                    Flexible(
+                      child: Text(
+                        user.username,
+                        style: TextStyle(fontSize: 18),
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                    ),
+                  ],
                 ),
-                Text(
-                  user.username,
-                )
-              ],
-            ),
-          )
+              ))
       ],
     );
   }
