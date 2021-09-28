@@ -1,16 +1,30 @@
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
+import 'package:it2g_calendar_mobile/store/people/people_actions.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
 
 class PeopleStateMap {
   final List<User> people;
   final bool loading;
+  final List<String> filters;
+  final List<String> selectedFilters;
 
-  PeopleStateMap({required this.people, required this.loading});
+  final Function setSelectedFilters;
+
+  PeopleStateMap(
+      {required this.people,
+      required this.loading,
+      required this.filters,
+      required this.selectedFilters,
+      required this.setSelectedFilters});
 }
 
 PeopleStateMap getPeopleStateMap(Store<AppState> store) {
   return new PeopleStateMap(
-      people: store.state.peopleState.people,
-      loading: store.state.peopleState.loading);
+      people: store.state.peopleState.filtredPeople,
+      loading: store.state.peopleState.loading,
+      filters: store.state.peopleState.filters,
+      selectedFilters: store.state.peopleState.selectedFilters,
+      setSelectedFilters: (List<String> filters) =>
+          store.dispatch(SetSelectedPeopleFiltersAction(filters)));
 }

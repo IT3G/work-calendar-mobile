@@ -4,6 +4,7 @@ import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
+import 'package:it2g_calendar_mobile/shared/utils/people_utils.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_actions.dart';
 import 'package:it2g_calendar_mobile/store/people/people_actions.dart';
@@ -49,8 +50,11 @@ class StoreFetchService {
     try {
       Response response = await ApiService.getUsers();
       dynamic data = jsonDecode(response.body);
+
       List<User> users = parseUsers(data);
-      print(users);
+      List<String> filters = getFilters(users);
+
+      _store.dispatch(SetPeopleFiltersAction(filters));
       _store.dispatch(SetPeopleAction(users));
     } catch (error) {
       print(error);

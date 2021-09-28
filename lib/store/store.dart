@@ -20,7 +20,12 @@ class AppState {
 }
 
 AppState initialState = new AppState(
-    peopleState: new PeopleState(people: [], loading: false),
+    peopleState: new PeopleState(
+        people: [],
+        loading: false,
+        filtredPeople: [],
+        filters: [],
+        selectedFilters: []),
     profileState: new ProfileState(
         authToken: getAuthToken(),
         refreshToken: '',

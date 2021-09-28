@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:it2g_calendar_mobile/screens/people/people_filter_screen_container.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_filters_screen.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list_container.dart';
@@ -32,8 +33,8 @@ class PeopleScreenState extends State<PeopleScreen> {
   }
 
   void openFilters(BuildContext context) {
-    Navigator.of(context)
-        .push(ModalOverlay(title: "Фильтр", child: PeopleFiltersScreen()));
+    Navigator.of(context).push(
+        ModalOverlay(title: "Фильтр", child: PeopleFiltersScreenContainer()));
   }
 
   @override
@@ -42,7 +43,7 @@ class PeopleScreenState extends State<PeopleScreen> {
         appBar: CupertinoNavigationBar(
           trailing: GestureDetector(
             onTap: () => openFilters(context),
-            child: Icon(Icons.filter_list_outlined),
+            child: Icon(Icons.tune),
           ),
           border: Border(
               bottom: BorderSide(

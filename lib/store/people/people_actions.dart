@@ -11,3 +11,15 @@ class SetPeopleLoadingAction {
 
   SetPeopleLoadingAction(this.payload);
 }
+
+class SetPeopleFiltersAction {
+  final List<String> payload;
+
+  SetPeopleFiltersAction(this.payload);
+}
+
+class SetSelectedPeopleFiltersAction {
+  final List<String> payload;
+
+  SetSelectedPeopleFiltersAction(this.payload);
+}
