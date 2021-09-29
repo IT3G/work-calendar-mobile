@@ -23,3 +23,9 @@ class SetSelectedPeopleFilterAction {
 
   SetSelectedPeopleFilterAction(this.payload);
 }
+
+class SetSearchQueryPeopleAction {
+  final String payload;
+
+  SetSearchQueryPeopleAction(this.payload);
+}

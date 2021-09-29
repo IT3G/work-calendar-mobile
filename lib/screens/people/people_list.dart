@@ -64,6 +64,7 @@ class PeopleList extends StatelessWidget {
                   bottom: BorderSide(color: Colors.grey.shade400, width: 0.5))),
           padding: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
           child: CupertinoTextField(
+            style: TextStyle(fontSize: 20),
             prefix: Padding(
               padding: EdgeInsets.only(left: 5),
               child: Icon(
@@ -72,7 +73,7 @@ class PeopleList extends StatelessWidget {
                 color: Colors.grey.shade400,
               ),
             ),
-            padding: EdgeInsets.only(top: 7, bottom: 7, right: 7, left: 2),
+            padding: EdgeInsets.only(top: 7, bottom: 7, right: 7, left: 10),
             decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.grey.shade100,
