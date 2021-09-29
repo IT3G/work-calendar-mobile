@@ -30,8 +30,12 @@ class UserDataBlock extends StatelessWidget {
 
       Navigator.of(context).push(ModalOverlay(
           title: firstLastName(user.username),
-          child: EmployeeCalendar(
-            tasks: tasks,
+          child: ListView(
+            children: [
+              EmployeeCalendar(
+                tasks: tasks,
+              )
+            ],
           )));
     } catch (error) {
       print(error);

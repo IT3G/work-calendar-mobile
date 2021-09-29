@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/shared/components/calendar_cell.dart';
 import 'package:it2g_calendar_mobile/shared/models/calendar_event.dart';
 import 'package:it2g_calendar_mobile/shared/models/task.dart';
 import 'package:it2g_calendar_mobile/shared/utils/calendar_utils.dart';
@@ -14,11 +15,18 @@ class EmployeeCalendar extends StatelessWidget {
     return Column(
       children: [
         Container(
-          height: 600,
+          height: 700,
           child: SfCalendar(
             view: CalendarView.month,
             dataSource: CalendarEventDataSource(getCalendarEvents(tasks)),
             monthViewSettings: MonthViewSettings(showAgenda: true),
+            monthCellBuilder: (context, details) => CalendarCell(
+              details: details,
+            ),
+            headerStyle: CalendarHeaderStyle(
+                textStyle:
+                    TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+            // cellBorderColor: Colors.grey,
           ),
         ),
       ],
