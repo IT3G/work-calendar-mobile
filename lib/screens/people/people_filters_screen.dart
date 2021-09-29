@@ -12,6 +12,7 @@ class PeopleFiltersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.only(left: 10, top: 40),
       child: FiltersBlockContainer(),
     );
   }

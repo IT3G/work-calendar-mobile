@@ -84,6 +84,7 @@ class PeopleList extends StatelessWidget {
         ),
         for (User user in people)
           Padding(
+              key: Key(user.mailNickname),
               padding: EdgeInsets.only(left: 10),
               child: GestureDetector(
                 onTap: () => openUserCard(context, user),

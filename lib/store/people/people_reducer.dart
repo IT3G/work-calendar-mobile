@@ -1,3 +1,5 @@
+import 'package:it2g_calendar_mobile/shared/models/user.dart';
+import 'package:it2g_calendar_mobile/shared/utils/people_utils.dart';
 import 'package:it2g_calendar_mobile/store/people/people_actions.dart';
 import 'package:it2g_calendar_mobile/store/people/people_state.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
@@ -46,12 +48,15 @@ AppState setSelectedPeopleFilters(AppState state, action) {
     prepareSelectedFilters.remove(action.payload);
   }
 
+  List<User> filtredUsers =
+      filterUsers(state.peopleState.people, prepareSelectedFilters);
+
   return updateState(
       state,
       new PeopleState(
           people: state.peopleState.people,
           loading: state.peopleState.loading,
-          filtredPeople: state.peopleState.filtredPeople,
+          filtredPeople: filtredUsers,
           filters: state.peopleState.filters,
           selectedFilters: prepareSelectedFilters));
 }

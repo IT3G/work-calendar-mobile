@@ -13,3 +13,20 @@ List<String> getFilters(List<User> users) {
 
   return filters;
 }
+
+List<User> filterUsers(List<User> users, List<String> filters) {
+  List<User> filtredUsers = [];
+
+  if (filters.length == 0) {
+    return users;
+  }
+
+  for (User user in users) {
+    if (filters.indexOf(user.subdivision.toLowerCase()) != -1) {
+      print(user.subdivision);
+      filtredUsers.add(user);
+    }
+  }
+
+  return filtredUsers;
+}

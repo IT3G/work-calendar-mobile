@@ -9,7 +9,7 @@ class FiltersButtonContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PeopleStateMap>(
         builder: (context, mapState) => FiltersButton(
-              filters: mapState.filters,
+              selectedFilters: mapState.selectedFilters,
               loading: mapState.loading,
             ),
         converter: getPeopleStateMap);
