@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters_button_container.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_filter_screen_container.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_filters_screen.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
@@ -41,10 +42,7 @@ class PeopleScreenState extends State<PeopleScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: CupertinoNavigationBar(
-          trailing: GestureDetector(
-            onTap: () => openFilters(context),
-            child: Icon(Icons.tune),
-          ),
+          trailing: FiltersButtonContainer(),
           border: Border(
               bottom: BorderSide(
                   width: 0,

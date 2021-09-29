@@ -1,34 +1,19 @@
 import 'package:flutter/material.dart';
 
-class FiltersBlock extends StatefulWidget {
+class FiltersBlock extends StatelessWidget {
   final List<String> items;
-  final Function onChange;
+  final List<String> selectedItems;
 
-  FiltersBlock({Key? key, required this.items, required this.onChange})
+  final Function selectItem;
+
+  FiltersBlock(
+      {Key? key,
+      required this.items,
+      required this.selectedItems,
+      required this.selectItem})
       : super(key: key);
 
-  @override
-  FiltersBlockState createState() =>
-      new FiltersBlockState(items: items, onChange: onChange);
-}
-
-class FiltersBlockState extends State<FiltersBlock> {
-  final List<String> items;
-  final Function onChange;
-
-  FiltersBlockState({required this.items, required this.onChange}) : super();
-
-  List<String> selected = [];
-
-  void handleSelectItem(String item) {
-    setState(() {
-      if (selected.indexOf(item) != -1) {
-        selected.remove(item);
-      } else {
-        selected.add(item);
-      }
-    });
-  }
+  void handleSelectItem(String item) {}
 
   @override
   Widget build(BuildContext context) {
@@ -38,13 +23,13 @@ class FiltersBlockState extends State<FiltersBlock> {
           children: [
             for (String item in items)
               GestureDetector(
-                onTap: () => handleSelectItem(item),
+                onTap: () => selectItem(item),
                 child: Container(
                   margin: EdgeInsets.only(bottom: 10, right: 10),
                   padding:
                       EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
                   decoration: BoxDecoration(
-                      color: selected.indexOf(item) != -1
+                      color: selectedItems.indexOf(item) != -1
                           ? Colors.blue
                           : Colors.white,
                       borderRadius: BorderRadius.circular(50),
@@ -53,7 +38,7 @@ class FiltersBlockState extends State<FiltersBlock> {
                     item,
                     style: TextStyle(
                         fontSize: 18,
-                        color: selected.indexOf(item) != -1
+                        color: selectedItems.indexOf(item) != -1
                             ? Colors.white
                             : Colors.blue),
                   ),

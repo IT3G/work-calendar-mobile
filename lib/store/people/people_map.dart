@@ -25,6 +25,6 @@ PeopleStateMap getPeopleStateMap(Store<AppState> store) {
       loading: store.state.peopleState.loading,
       filters: store.state.peopleState.filters,
       selectedFilters: store.state.peopleState.selectedFilters,
-      setSelectedFilters: (List<String> filters) =>
-          store.dispatch(SetSelectedPeopleFiltersAction(filters)));
+      setSelectedFilters: (String filter) =>
+          store.dispatch(SetSelectedPeopleFilterAction(filter)));
 }

@@ -18,8 +18,8 @@ class SetPeopleFiltersAction {
   SetPeopleFiltersAction(this.payload);
 }
 
-class SetSelectedPeopleFiltersAction {
-  final List<String> payload;
+class SetSelectedPeopleFilterAction {
+  final String payload;
 
-  SetSelectedPeopleFiltersAction(this.payload);
+  SetSelectedPeopleFilterAction(this.payload);
 }

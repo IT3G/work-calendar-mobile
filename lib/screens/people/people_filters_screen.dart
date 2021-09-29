@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/shared/components/filters_block.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters_block_container.dart';
 
 class PeopleFiltersScreen extends StatelessWidget {
   final List<String> filters;
@@ -12,10 +12,7 @@ class PeopleFiltersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: FiltersBlock(
-        onChange: setSelectedFilters,
-        items: filters,
-      ),
+      child: FiltersBlockContainer(),
     );
   }
 }

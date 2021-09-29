@@ -37,6 +37,15 @@ AppState setPeopleFilters(AppState state, action) {
 }
 
 AppState setSelectedPeopleFilters(AppState state, action) {
+  List<String> prepareSelectedFilters =
+      new List.from(state.peopleState.selectedFilters);
+
+  if (prepareSelectedFilters.indexOf(action.payload) == -1) {
+    prepareSelectedFilters.add(action.payload);
+  } else {
+    prepareSelectedFilters.remove(action.payload);
+  }
+
   return updateState(
       state,
       new PeopleState(
@@ -44,13 +53,13 @@ AppState setSelectedPeopleFilters(AppState state, action) {
           loading: state.peopleState.loading,
           filtredPeople: state.peopleState.filtredPeople,
           filters: state.peopleState.filters,
-          selectedFilters: action.payload));
+          selectedFilters: prepareSelectedFilters));
 }
 
 Reducer<AppState> peopleReducer = combineReducers([
   new TypedReducer<AppState, SetPeopleAction>(setPeople),
   new TypedReducer<AppState, SetPeopleLoadingAction>(setPeopleLoading),
   new TypedReducer<AppState, SetPeopleFiltersAction>(setPeopleFilters),
-  new TypedReducer<AppState, SetSelectedPeopleFiltersAction>(
+  new TypedReducer<AppState, SetSelectedPeopleFilterAction>(
       setSelectedPeopleFilters)
 ]);
