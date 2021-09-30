@@ -8,8 +8,7 @@ class ProfileScreenContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, ProfileMapState>(
-        builder: (context, mapState) => ProfileScreen(
-            user: mapState.user, setAuthToken: mapState.setAuthToken),
+        builder: (context, mapState) => ProfileScreen(user: mapState.user),
         converter: (store) => getProfileMapState(store));
   }
 }

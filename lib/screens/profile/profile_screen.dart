@@ -9,10 +9,8 @@ import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class ProfileScreen extends StatelessWidget {
   final User user;
-  final Function setAuthToken;
 
-  ProfileScreen({Key? key, required this.user, required this.setAuthToken})
-      : super(key: key);
+  ProfileScreen({Key? key, required this.user}) : super(key: key);
 
   void openEditForm(BuildContext context) {
     Navigator.of(context).push(ModalOverlay(
@@ -22,9 +20,9 @@ class ProfileScreen extends StatelessWidget {
         )));
   }
 
-  void logout() {
+  void logout() async {
     removeAuthToken();
-    setAuthToken('');
+    removeServerUrl();
   }
 
   @override

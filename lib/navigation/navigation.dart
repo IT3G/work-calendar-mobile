@@ -8,26 +8,31 @@ import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
 import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class Navigation extends StatelessWidget {
-  final bool hasAuthToken;
+  final String authToken;
   final String serverUrl;
 
-  Navigation({Key? key, required this.hasAuthToken, required this.serverUrl})
+  Navigation({Key? key, required this.authToken, required this.serverUrl})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    String storageServerUrl = getServerUrl();
-    bool showAuhtorizationForm =
-        (storageServerUrl.isEmpty && dotenv.env['API_BASE_URL'] != null) ||
-            serverUrl.isNotEmpty;
+    String storageServerUrl = getStorageServerUrl();
+    String storageAuthToken = getStorageAuthToken();
 
-    if (hasAuthToken) {
-      return TabNavigation();
-    }
+    bool hasServerUrl = storageServerUrl.isNotEmpty ||
+        dotenv.env['API_BASE_URL'] != null ||
+        serverUrl.isNotEmpty;
 
-    if (showAuhtorizationForm) {
-      if (dotenv.env['API_BASE_URL'] != null) {
+    if (hasServerUrl) {
+      if (storageServerUrl.isNotEmpty) ApiUrls.setBaseUrl(storageServerUrl);
+      if (dotenv.env['API_BASE_URL'] != null)
         ApiUrls.setBaseUrl(dotenv.env['API_BASE_URL']!);
+      if (serverUrl.isNotEmpty) ApiUrls.setBaseUrl(serverUrl);
+
+      bool hasAuthToken = storageAuthToken.isNotEmpty || authToken.isNotEmpty;
+
+      if (hasAuthToken) {
+        return TabNavigation();
       }
 
       return AuthorizationScreen();
@@ -36,3 +41,5 @@ class Navigation extends StatelessWidget {
     return EntryScreenContainer();
   }
 }
+
+//dotenv.env['API_BASE_URL'] != null
