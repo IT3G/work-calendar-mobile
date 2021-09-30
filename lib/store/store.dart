@@ -31,7 +31,7 @@ AppState initialState = new AppState(
         filters: [],
         selectedFilters: []),
     profileState: new ProfileState(
-        authToken: getAuthToken(),
+        authToken: getStorageAuthToken(),
         refreshToken: '',
         user: parseUser(null),
         loading: false),
