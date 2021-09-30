@@ -23,6 +23,8 @@ class EmployeeCalendar extends StatelessWidget {
             monthCellBuilder: (context, details) => CalendarCell(
               details: details,
             ),
+            resourceViewHeaderBuilder: (context, details) =>
+                Text(details.resource.displayName),
             headerStyle: CalendarHeaderStyle(
                 textStyle:
                     TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),

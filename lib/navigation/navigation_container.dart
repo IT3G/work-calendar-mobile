@@ -9,6 +9,7 @@ class NavigationContainer extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, ProfileMapState>(
         builder: (context, mapState) => Navigation(
+              serverUrl: mapState.settings.serverUrl,
               hasAuthToken: mapState.authToken.isNotEmpty,
             ),
         converter: (store) => getProfileMapState(store));
