@@ -2,14 +2,10 @@ import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/profile/profile_actions.dart';
 import 'package:it2g_calendar_mobile/store/profile/profile_state.dart';
-import 'package:it2g_calendar_mobile/store/storage.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
 
 AppState setAuthToken(AppState state, action) {
-  // storage.setItem('authToken', action.payload);
-  // ApiService.setAuthToken(action.payload);
-
   return updateState(
       state,
       new ProfileState(
