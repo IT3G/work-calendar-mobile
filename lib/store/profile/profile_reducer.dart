@@ -7,8 +7,8 @@ import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
 
 AppState setAuthToken(AppState state, action) {
-  storage.setItem('authToken', action.payload);
-  ApiService.setAuthToken(action.payload);
+  // storage.setItem('authToken', action.payload);
+  // ApiService.setAuthToken(action.payload);
 
   return updateState(
       state,

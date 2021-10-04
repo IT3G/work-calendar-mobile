@@ -4,6 +4,7 @@ import 'package:it2g_calendar_mobile/screens/authorization/authorization_screen.
 import 'package:it2g_calendar_mobile/screens/entry/entry_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:it2g_calendar_mobile/screens/entry/entry_screen_container.dart';
+import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
 import 'package:it2g_calendar_mobile/store/storage.dart';
 
@@ -31,7 +32,13 @@ class Navigation extends StatelessWidget {
 
       bool hasAuthToken = storageAuthToken.isNotEmpty || authToken.isNotEmpty;
 
+      print(storageAuthToken);
+
       if (hasAuthToken) {
+        if (storageAuthToken.isNotEmpty)
+          ApiService.setAuthToken(storageAuthToken);
+        if (authToken.isNotEmpty) ApiService.setAuthToken(authToken);
+
         return TabNavigation();
       }
 
