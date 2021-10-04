@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
+import 'package:it2g_calendar_mobile/screens/people/list/people_list.dart';
 import 'package:it2g_calendar_mobile/store/people/people_map.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 
