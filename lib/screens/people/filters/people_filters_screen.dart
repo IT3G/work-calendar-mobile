@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/screens/people/filters_block_container.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/filters_devisions_block_container.dart';
 
 class PeopleFiltersScreen extends StatelessWidget {
   final List<String> filters;
@@ -13,7 +13,7 @@ class PeopleFiltersScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.only(left: 10, top: 40),
-      child: FiltersBlockContainer(),
+      child: FiltersDevisionsBlockContainer(),
     );
   }
 }

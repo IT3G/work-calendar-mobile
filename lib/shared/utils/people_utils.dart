@@ -30,3 +30,13 @@ List<User> filterUsers(List<User> users, List<String> filters) {
 
   return filtredUsers;
 }
+
+List<String> getMailNicks(List<dynamic> data) {
+  List<String> mailNicks = [];
+
+  for (dynamic userData in data) {
+    mailNicks.add(userData['mailNickname']!);
+  }
+
+  return mailNicks;
+}

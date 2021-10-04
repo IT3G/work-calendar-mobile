@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:it2g_calendar_mobile/screens/people/filters_button_container.dart';
-import 'package:it2g_calendar_mobile/screens/people/people_filter_screen_container.dart';
-import 'package:it2g_calendar_mobile/screens/people/people_filters_screen.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/filters_button_container.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/people_filter_screen_container.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/people_filters_screen.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_list_container.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';

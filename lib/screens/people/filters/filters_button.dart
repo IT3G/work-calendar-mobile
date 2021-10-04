@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/screens/people/people_filter_screen_container.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/people_filter_screen_container.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 
 class FiltersButton extends StatelessWidget {

@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/screens/calendar/calendar_screen.dart';
 import 'package:it2g_calendar_mobile/screens/calendar/calendar_screen_container.dart';
-import 'package:it2g_calendar_mobile/screens/people/people_list_container.dart';
 import 'package:it2g_calendar_mobile/screens/people/people_screen.dart';
 import 'package:it2g_calendar_mobile/screens/profile/profile_screen_container.dart';
-import 'package:it2g_calendar_mobile/screens/profile/profile_screen.dart';
 
 class TabNavigation extends StatelessWidget {
   Widget getScreen(int tabIndex) {

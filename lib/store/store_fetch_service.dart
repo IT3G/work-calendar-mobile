@@ -51,6 +51,8 @@ class StoreFetchService {
       Response response = await ApiService.getUsers();
       dynamic data = jsonDecode(response.body);
 
+      print(data);
+
       List<User> users = parseUsers(data);
       List<String> filters = getFilters(users);
 
@@ -64,6 +66,26 @@ class StoreFetchService {
   }
 
   static fetchBirthdays() async {
-    try {} catch (error) {}
+    try {
+      Response responseToday = await ApiService.getBirthdays('today');
+      Response responseWeek = await ApiService.getBirthdays('week');
+      Response responseMonth = await ApiService.getBirthdays('month');
+
+      List<String> birthdaysToday =
+          getMailNicks(jsonDecode(responseToday.body));
+      List<String> birthdaysWeek = getMailNicks(jsonDecode(responseWeek.body));
+      List<String> birthdaysMonth =
+          getMailNicks(jsonDecode(responseMonth.body));
+
+      print(birthdaysToday);
+      print(birthdaysWeek);
+      print(birthdaysMonth);
+
+      _store.dispatch(SetBirthdayTodayAction(birthdaysToday));
+      _store.dispatch(SetBirthdayWeekAction(birthdaysWeek));
+      _store.dispatch(SetBirthdayMonthAction(birthdaysMonth));
+    } catch (error) {
+      print(error);
+    }
   }
 }
