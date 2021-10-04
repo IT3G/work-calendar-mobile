@@ -7,10 +7,17 @@ class PeopleState {
   final List<String> filters;
   final List<String> selectedFilters;
 
+  final List<String> birthdaysToday;
+  final List<String> birthdaysWeek;
+  final List<String> birthdaysMonth;
+
   PeopleState(
       {required this.people,
       required this.loading,
       required this.filtredPeople,
       required this.filters,
-      required this.selectedFilters});
+      required this.selectedFilters,
+      required this.birthdaysMonth,
+      required this.birthdaysToday,
+      required this.birthdaysWeek});
 }

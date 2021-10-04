@@ -14,4 +14,5 @@ class ApiUrls {
   static final String avatar = '$baseUrl/avatar';
   static final String users = '$baseUrl/users';
   static final String login = '$baseUrl/users/login';
+  static final String birthday = '$baseUrl/birthday/current/';
 }

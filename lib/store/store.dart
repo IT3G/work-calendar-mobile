@@ -29,7 +29,10 @@ AppState initialState = new AppState(
         loading: false,
         filtredPeople: [],
         filters: [],
-        selectedFilters: []),
+        selectedFilters: [],
+        birthdaysToday: [],
+        birthdaysWeek: [],
+        birthdaysMonth: []),
     profileState: new ProfileState(
         authToken: getStorageAuthToken(),
         refreshToken: '',

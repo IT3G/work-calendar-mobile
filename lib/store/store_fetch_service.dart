@@ -62,4 +62,8 @@ class StoreFetchService {
       _store.dispatch(SetPeopleLoadingAction(false));
     }
   }
+
+  static fetchBirthdays() async {
+    try {} catch (error) {}
+  }
 }

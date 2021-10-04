@@ -67,4 +67,13 @@ class ApiService {
       return response;
     });
   }
+
+  static Future<Response> getBirthdays(String period) {
+    Uri url = Uri.parse(ApiUrls.birthday + period);
+    return http
+        .get(url, headers: {'Authorization': _authToken}).then((response) {
+      checkFreshnessToken(response);
+      return response;
+    });
+  }
 }

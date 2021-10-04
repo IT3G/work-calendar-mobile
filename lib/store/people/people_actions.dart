@@ -29,3 +29,21 @@ class SetSearchQueryPeopleAction {
 
   SetSearchQueryPeopleAction(this.payload);
 }
+
+class SetBirthdayTodayAction {
+  final List<String> payload;
+
+  SetBirthdayTodayAction(this.payload);
+}
+
+class SetBirthdayWeekAction {
+  final List<String> payload;
+
+  SetBirthdayWeekAction(this.payload);
+}
+
+class SetBirthdayMonthAction {
+  final List<String> payload;
+
+  SetBirthdayMonthAction(this.payload);
+}

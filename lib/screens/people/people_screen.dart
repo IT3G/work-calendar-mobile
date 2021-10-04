@@ -25,6 +25,7 @@ class PeopleScreenState extends State<PeopleScreen> {
   void initState() {
     super.initState();
     StoreFetchService.fetchUsers();
+    StoreFetchService.fetchBirthdays();
   }
 
   void handleScrollPeopleList(double offset) {
