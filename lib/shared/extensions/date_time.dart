@@ -4,4 +4,19 @@ extension DateParser on DateTime {
 
     return dateStr;
   }
+
+  bool isBirthday(String date) {
+    if (date.isEmpty) {
+      return false;
+    }
+
+    String now = DateTime.now().getDateWithoutTime();
+
+    String birthDay = date.split('-')[1];
+    String birthMonth = date.split('-')[2];
+
+    print(now.split('-')[1]);
+
+    return now.split('-')[1] == birthDay && now.split('-')[2] == birthMonth;
+  }
 }
