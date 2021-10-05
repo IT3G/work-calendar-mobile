@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class FiltersBlock extends StatelessWidget {
   final List<String> items;
   final List<String> selectedItems;
+  final Color color;
 
   final Function selectItem;
 
@@ -10,14 +11,15 @@ class FiltersBlock extends StatelessWidget {
       {Key? key,
       required this.items,
       required this.selectedItems,
-      required this.selectItem})
+      required this.selectItem,
+      this.color = Colors.blue})
       : super(key: key);
 
   void handleSelectItem(String item) {}
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
+    return Column(
       children: [
         Wrap(
           children: [
@@ -30,17 +32,17 @@ class FiltersBlock extends StatelessWidget {
                       EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
                   decoration: BoxDecoration(
                       color: selectedItems.indexOf(item) != -1
-                          ? Colors.blue
+                          ? color
                           : Colors.white,
                       borderRadius: BorderRadius.circular(50),
-                      border: Border.all(width: 2, color: Colors.blue)),
+                      border: Border.all(width: 2, color: color)),
                   child: Text(
                     item,
                     style: TextStyle(
                         fontSize: 18,
                         color: selectedItems.indexOf(item) != -1
                             ? Colors.white
-                            : Colors.blue),
+                            : color),
                   ),
                 ),
               )
