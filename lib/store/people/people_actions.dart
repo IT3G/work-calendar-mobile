@@ -47,3 +47,15 @@ class SetBirthdayMonthAction {
 
   SetBirthdayMonthAction(this.payload);
 }
+
+class SetBirthdayFiltersAction {
+  final List<String> payload;
+
+  SetBirthdayFiltersAction(this.payload);
+}
+
+class SetSelectedBirthdayFiltersAction {
+  final String payload;
+
+  SetSelectedBirthdayFiltersAction(this.payload);
+}

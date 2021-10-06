@@ -9,14 +9,21 @@ class PeopleStateMap {
   final List<String> filters;
   final List<String> selectedFilters;
 
+  final List<String> birthdayFilters;
+  final String selectedBirthdayPeriod;
+
   final Function setSelectedFilters;
+  final Function setSelectedBirthdayFilters;
 
   PeopleStateMap(
       {required this.people,
       required this.loading,
       required this.filters,
       required this.selectedFilters,
-      required this.setSelectedFilters});
+      required this.setSelectedFilters,
+      required this.birthdayFilters,
+      required this.setSelectedBirthdayFilters,
+      required this.selectedBirthdayPeriod});
 }
 
 PeopleStateMap getPeopleStateMap(Store<AppState> store) {
@@ -26,5 +33,9 @@ PeopleStateMap getPeopleStateMap(Store<AppState> store) {
       filters: store.state.peopleState.filters,
       selectedFilters: store.state.peopleState.selectedFilters,
       setSelectedFilters: (String filter) =>
-          store.dispatch(SetSelectedPeopleFilterAction(filter)));
+          store.dispatch(SetSelectedPeopleFilterAction(filter)),
+      birthdayFilters: store.state.peopleState.birthdayFilters,
+      selectedBirthdayPeriod: store.state.peopleState.selectedBirthdayPeriod,
+      setSelectedBirthdayFilters: (String filter) =>
+          store.dispatch(SetSelectedBirthdayFiltersAction(filter)));
 }

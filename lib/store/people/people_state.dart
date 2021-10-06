@@ -4,8 +4,12 @@ class PeopleState {
   final List<User> people;
   final List<User> filtredPeople;
   final bool loading;
+
   final List<String> filters;
   final List<String> selectedFilters;
+
+  final List<String> birthdayFilters;
+  final String selectedBirthdayPeriod;
 
   final List<String> birthdaysToday;
   final List<String> birthdaysWeek;
@@ -19,5 +23,7 @@ class PeopleState {
       required this.selectedFilters,
       required this.birthdaysMonth,
       required this.birthdaysToday,
-      required this.birthdaysWeek});
+      required this.birthdaysWeek,
+      required this.birthdayFilters,
+      required this.selectedBirthdayPeriod});
 }

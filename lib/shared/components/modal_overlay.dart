@@ -4,8 +4,13 @@ import 'package:flutter/material.dart';
 class ModalOverlay extends ModalRoute {
   final Widget child;
   final String title;
+  final Widget trailing;
 
-  ModalOverlay({required this.child, required this.title}) : super();
+  ModalOverlay(
+      {required this.child,
+      required this.title,
+      this.trailing = const Text("")})
+      : super();
 
   @override
   Color? get barrierColor => Colors.grey.shade50;
@@ -35,6 +40,7 @@ class ModalOverlay extends ModalRoute {
         child: Scaffold(
       appBar: CupertinoNavigationBar(
         middle: Text(title),
+        trailing: trailing,
       ),
       body: Container(child: child),
     ));

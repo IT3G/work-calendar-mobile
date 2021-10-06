@@ -40,3 +40,20 @@ List<String> getMailNicks(List<dynamic> data) {
 
   return mailNicks;
 }
+
+List<User> getBirthdayPeople(List<User> users, List<String> birthdaysMails) {
+  if (birthdaysMails.length == 0) {
+    return users;
+  }
+
+  List<User> filterdUsers = [];
+
+  for (User user in users) {
+    bool isBirthdayUser = birthdaysMails.contains(user.mailNickname);
+    if (isBirthdayUser) {
+      filterdUsers.add(user);
+    }
+  }
+
+  return filterdUsers;
+}

@@ -1,3 +1,4 @@
+import 'package:it2g_calendar_mobile/shared/constants/filter_const.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_reducer.dart';
 import 'package:it2g_calendar_mobile/store/calendar/calendar_state.dart';
@@ -32,7 +33,9 @@ AppState initialState = new AppState(
         selectedFilters: [],
         birthdaysToday: [],
         birthdaysWeek: [],
-        birthdaysMonth: []),
+        birthdaysMonth: [],
+        birthdayFilters: BirthdayPeriods.periods,
+        selectedBirthdayPeriod: BirthdayPeriods.all),
     profileState: new ProfileState(
         authToken: getStorageAuthToken(),
         refreshToken: '',
