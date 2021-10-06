@@ -26,7 +26,7 @@ class CheckboxBlock extends StatelessWidget {
                   decoration: BoxDecoration(
                       border: Border(
                           bottom: BorderSide(
-                              color: selected.indexOf(item) == items.length - 1
+                              color: items.indexOf(item) == items.length - 1
                                   ? Colors.white
                                   : Colors.grey.withAlpha(80)))),
                   padding: EdgeInsets.only(top: 10, bottom: 10, right: 10),
@@ -35,7 +35,7 @@ class CheckboxBlock extends StatelessWidget {
                     children: [
                       Text(
                         item,
-                        style: TextStyle(fontSize: 18),
+                        style: TextStyle(fontSize: 18, color: Colors.grey[700]),
                       ),
                       Container(
                         child: Icon(
