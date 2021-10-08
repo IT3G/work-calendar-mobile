@@ -88,7 +88,6 @@ class DateTimeFieldState extends State<DateTimeField> {
               padding: EdgeInsets.only(top: 200),
               child: GestureDetector(
                 onTap: () {
-                  print('TAP');
                   Navigator.pop(context);
                 },
                 child: Column(

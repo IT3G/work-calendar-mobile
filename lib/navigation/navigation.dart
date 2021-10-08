@@ -32,8 +32,6 @@ class Navigation extends StatelessWidget {
 
       bool hasAuthToken = storageAuthToken.isNotEmpty || authToken.isNotEmpty;
 
-      print(storageAuthToken);
-
       if (hasAuthToken) {
         if (storageAuthToken.isNotEmpty)
           ApiService.setAuthToken(storageAuthToken);

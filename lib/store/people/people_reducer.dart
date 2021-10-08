@@ -56,6 +56,7 @@ AppState setPeopleFilters(AppState state, action) {
 }
 
 AppState setSelectedPeopleFilters(AppState state, action) {
+  // Подготовка списка пользователей учитвыя все фильтры
   List<String> birthdaysList = [];
 
   switch (state.peopleState.selectedBirthdayPeriod) {
@@ -78,10 +79,57 @@ AppState setSelectedPeopleFilters(AppState state, action) {
   List<String> prepareSelectedFilters =
       List.from(state.peopleState.selectedFilters);
 
-  if (prepareSelectedFilters.indexOf(action.payload) == -1) {
-    prepareSelectedFilters.add(action.payload);
+  // В зависимостри от значения action.payload либо добавляем
+  // Массив фильтром либо фильтр из action.payload
+
+  if (Devisions.structures.contains(action.payload)) {
+    switch (action.payload) {
+      case Devisions.managmentName:
+        bool hasFilters = Devisions.management
+            .any((filter) => prepareSelectedFilters.contains(filter));
+
+        if (hasFilters) {
+          prepareSelectedFilters
+              .removeWhere((filter) => Devisions.management.contains(filter));
+          print(prepareSelectedFilters);
+          break;
+        }
+
+        prepareSelectedFilters.addAll(Devisions.management);
+        break;
+
+      case Devisions.developmentName:
+        bool hasFilters = Devisions.development
+            .any((filter) => prepareSelectedFilters.contains(filter));
+
+        if (hasFilters) {
+          prepareSelectedFilters
+              .removeWhere((filter) => Devisions.development.contains(filter));
+          break;
+        }
+
+        prepareSelectedFilters.addAll(Devisions.development);
+        break;
+
+      case Devisions.uiuxName:
+        bool hasFilters = Devisions.uiux
+            .any((filter) => prepareSelectedFilters.contains(filter));
+
+        if (hasFilters) {
+          prepareSelectedFilters
+              .removeWhere((filter) => Devisions.uiux.contains(filter));
+          break;
+        }
+
+        prepareSelectedFilters.addAll(Devisions.uiux);
+        break;
+    }
   } else {
-    prepareSelectedFilters.remove(action.payload);
+    if (prepareSelectedFilters.indexOf(action.payload) == -1) {
+      prepareSelectedFilters.add(action.payload);
+    } else {
+      prepareSelectedFilters.remove(action.payload);
+    }
   }
 
   List<User> filtredUsers = filterUsers(birthdayPeople, prepareSelectedFilters);

@@ -72,7 +72,6 @@ class AuthorizationFormState extends State<AuthorizationForm> {
     final String password = passwordController.text;
 
     if (login.isNotEmpty && password.isNotEmpty) {
-      print('SUCCESS');
       this.login(login: login, password: password);
     }
   }

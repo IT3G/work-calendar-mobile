@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/people/filters/filters_button_container.dart';
-import 'package:it2g_calendar_mobile/screens/people/filters/people_filter_screen_container.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/people_filters_screen_container.dart';
 import 'package:it2g_calendar_mobile/screens/people/list/people_list_container.dart';
 import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
 import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';

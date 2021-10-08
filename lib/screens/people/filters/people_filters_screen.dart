@@ -18,7 +18,7 @@ class PeopleFiltersScreen extends StatelessWidget {
       child: ListView(
         children: [
           LabledBox(child: FiltersBirthdayBlock(), label: 'День рождения'),
-          LabledBox(child: FiltersDevisionsBlock(), label: 'Подразделения')
+          FiltersDevisionsBlock()
         ],
       ),
     );
