@@ -24,8 +24,7 @@ class PeopleListItem extends StatelessWidget {
   }
 
   bool isBirthday() {
-    print(user.birthday);
-    print(DateTime.now().getDateWithoutTime());
+    //TODO: Доделать иконку дня рождения
     return false;
   }
 
