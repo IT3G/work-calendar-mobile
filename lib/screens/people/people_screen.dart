@@ -35,16 +35,17 @@ class PeopleScreenState extends State<PeopleScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CupertinoNavigationBar(
-          trailing: FiltersButtonContainer(),
-          border: Border(
-              bottom: BorderSide(
-                  width: 0,
-                  color: showNavBorder ? Colors.grey : Colors.grey.shade100)),
-          middle: Text("Коллеги"),
-        ),
-        body: PeopleListContainer(
-          onScroll: handleScrollPeopleList,
-        ));
+      appBar: CupertinoNavigationBar(
+        trailing: FiltersButtonContainer(),
+        border: Border(
+            bottom: BorderSide(
+                width: 0,
+                color: showNavBorder ? Colors.grey : Colors.grey.shade100)),
+        middle: Text("Коллеги"),
+      ),
+      body: PeopleListContainer(
+        onScroll: handleScrollPeopleList,
+      ),
+    );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:it2g_calendar_mobile/screens/people/filters/birthday_message.dart';
 import 'package:it2g_calendar_mobile/screens/people/list/people_list_item.dart';
 import 'package:it2g_calendar_mobile/shared/components/avatar.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
@@ -13,18 +14,31 @@ class PeopleList extends StatelessWidget {
   final List<User> people;
   final bool loading;
   final Function onScroll;
+  final List<String> birthdaysToday;
 
   PeopleList(
       {Key? key,
       required this.people,
       required this.loading,
-      required this.onScroll})
+      required this.onScroll,
+      this.birthdaysToday = const []})
       : super(key: key);
 
   final ScrollController scrollController = new ScrollController();
 
   void handleScroll() {
     onScroll(scrollController.offset);
+  }
+
+  Widget getBirthdaysMessage() {
+    if (loading || birthdaysToday.length == 0) {
+      return Container();
+    }
+
+    return Positioned(
+      child: BirthdaysMessage(),
+      bottom: 50,
+    );
   }
 
   @override
@@ -44,39 +58,48 @@ class PeopleList extends StatelessWidget {
       );
     }
 
-    return ListView(
-      controller: scrollController,
+    return Stack(
       children: [
-        Container(
-          decoration: BoxDecoration(
-              border: Border(
-                  bottom: BorderSide(color: Colors.grey.shade400, width: 0.5))),
-          padding: EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
-          child: CupertinoTextField(
-            style: TextStyle(fontSize: 20),
-            prefix: Padding(
-              padding: EdgeInsets.only(left: 5),
-              child: Icon(
-                Icons.search,
-                size: 20,
-                color: Colors.grey.shade400,
+        ListView(
+          controller: scrollController,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  border: Border(
+                      bottom:
+                          BorderSide(color: Colors.grey.shade400, width: 0.5))),
+              padding:
+                  EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
+              child: CupertinoTextField(
+                style: TextStyle(fontSize: 20),
+                prefix: Padding(
+                  padding: EdgeInsets.only(left: 5),
+                  child: Icon(
+                    Icons.search,
+                    size: 20,
+                    color: Colors.grey.shade400,
+                  ),
+                ),
+                padding: EdgeInsets.only(top: 7, bottom: 7, right: 7, left: 10),
+                decoration: BoxDecoration(
+                    border: Border.all(
+                      color: Colors.grey.shade100,
+                    ),
+                    color: Colors.grey[200],
+                    borderRadius: BorderRadius.circular(8)),
+                placeholder: "Поиск",
               ),
             ),
-            padding: EdgeInsets.only(top: 7, bottom: 7, right: 7, left: 10),
-            decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.shade100,
-                ),
-                color: Colors.grey[200],
-                borderRadius: BorderRadius.circular(8)),
-            placeholder: "Поиск",
-          ),
+            for (User user in people)
+              PeopleListItem(
+                user: user,
+              )
+          ],
         ),
-        for (User user in people)
-          PeopleListItem(
-            user: user,
-          )
+        getBirthdaysMessage()
       ],
     );
+
+    // return ;
   }
 }

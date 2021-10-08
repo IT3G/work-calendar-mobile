@@ -16,6 +16,7 @@ class PeopleListContainer extends StatelessWidget {
               people: mapState.people,
               loading: mapState.loading,
               onScroll: onScroll,
+              birthdaysToday: mapState.birthdaysToday,
             ),
         converter: getPeopleStateMap);
   }
