@@ -41,6 +41,7 @@ dependencies:
   syncfusion_localizations: ^19.2.62
   datetime_picker_formfield: ^2.0.0
   modal_bottom_sheet: ^2.0.0
+  connectivity_plus: ^2.0.2
 
 dev_dependencies:
   flutter_test:

@@ -3,6 +3,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:it2g_calendar_mobile/shared/components/checkbox_block.dart';
 import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
 import 'package:it2g_calendar_mobile/shared/constants/filter_const.dart';
+import 'package:it2g_calendar_mobile/shared/utils/people_utils.dart';
 import 'package:it2g_calendar_mobile/store/people/people_map.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 
@@ -22,7 +23,10 @@ class FiltersDevisionsBlock extends StatelessWidget {
                     child: Icon(
                       Icons.check,
                       size: 24,
-                      color: Colors.grey[400],
+                      color: listEntryInto(
+                              Devisions.management, mapState.selectedFilters)
+                          ? Colors.blue
+                          : Colors.grey[400],
                     ),
                   ),
                   child: CheckboxBlock(
@@ -40,7 +44,10 @@ class FiltersDevisionsBlock extends StatelessWidget {
                     child: Icon(
                       Icons.check,
                       size: 24,
-                      color: Colors.grey[400],
+                      color: listEntryInto(
+                              Devisions.development, mapState.selectedFilters)
+                          ? Colors.blue
+                          : Colors.grey[400],
                     ),
                   ),
                   child: CheckboxBlock(

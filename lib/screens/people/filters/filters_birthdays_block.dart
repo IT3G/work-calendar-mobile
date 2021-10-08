@@ -9,7 +9,6 @@ class FiltersBirthdayBlock extends StatelessWidget {
   Widget build(BuildContext context) {
     return StoreConnector<AppState, PeopleStateMap>(
         builder: (BuildContext context, mapState) => CheckboxBlock(
-              color: Colors.red.shade200,
               onSelect: mapState.setSelectedBirthdayFilters,
               items: mapState.birthdayFilters,
               selected: [mapState.selectedBirthdayPeriod],

@@ -57,3 +57,15 @@ List<User> getBirthdayPeople(List<User> users, List<String> birthdaysMails) {
 
   return filterdUsers;
 }
+
+bool listEntryInto(List<String> firstList, List<String> secondList) {
+  bool hasItem = true;
+
+  for (String item in firstList) {
+    if (!secondList.contains(item)) {
+      hasItem = false;
+    }
+  }
+
+  return hasItem;
+}
