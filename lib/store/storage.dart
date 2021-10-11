@@ -42,9 +42,18 @@ class Storage {
   }
 
   static dynamic getAuthorizationData() {
-    String login = _localStorage.getItem('login');
-    String password = _localStorage.getItem('password');
+    dynamic login = _localStorage.getItem('login');
+    dynamic password = _localStorage.getItem('password');
+
+    if (login == null || password == null) {
+      return null;
+    }
 
     return {'login': login, 'password': password};
+  }
+
+  static void removeAuthorizationData() async {
+    await _localStorage.setItem('login', null);
+    await _localStorage.setItem('password', null);
   }
 }
