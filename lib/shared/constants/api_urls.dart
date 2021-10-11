@@ -1,5 +1,3 @@
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
 class ApiUrls {
   static String baseUrl = '';
 
@@ -15,4 +13,5 @@ class ApiUrls {
   static final String users = '$baseUrl/users';
   static final String login = '$baseUrl/users/login';
   static final String birthday = '$baseUrl/birthday/current/';
+  static final String subdivisions = '$baseUrl/subdivision';
 }

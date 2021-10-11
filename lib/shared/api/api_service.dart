@@ -76,4 +76,13 @@ class ApiService {
       return response;
     });
   }
+
+  static Future<Response> getSubdivisions() {
+    Uri url = Uri.parse(ApiUrls.subdivisions);
+    return http
+        .get(url, headers: {'Authorization': _authToken}).then((response) {
+      checkFreshnessToken(response);
+      return response;
+    });
+  }
 }
