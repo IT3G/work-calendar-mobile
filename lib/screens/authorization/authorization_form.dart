@@ -2,11 +2,11 @@ import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
 import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
+import 'package:it2g_calendar_mobile/store/storage.dart';
 
 class AuthorizationForm extends StatefulWidget {
   final setAuthToken;

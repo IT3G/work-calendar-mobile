@@ -21,8 +21,8 @@ class ProfileScreen extends StatelessWidget {
   }
 
   void logout() async {
-    removeAuthToken();
-    removeServerUrl();
+    Storage.removeAuthToken();
+    Storage.removeServerUrl();
   }
 
   @override
