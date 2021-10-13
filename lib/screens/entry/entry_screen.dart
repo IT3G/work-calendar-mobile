@@ -23,6 +23,7 @@ class EntryScreenState extends State<EntryScreen> {
   EntryScreenState({required this.setServerUrl}) : super();
 
   bool loading = false;
+  String messageError = '';
 
   final TextEditingController serverController = new TextEditingController();
 
@@ -31,7 +32,11 @@ class EntryScreenState extends State<EntryScreen> {
     if (serverUrl.isNotEmpty) {
       checkServerUrl(serverUrl, () {
         setServerUrl(serverUrl);
-      }, () {});
+      }, () {
+        setState(() {
+          messageError = 'Указан некорректный адрес';
+        });
+      });
     }
   }
 
@@ -78,7 +83,7 @@ class EntryScreenState extends State<EntryScreen> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(bottom: 20, top: 20),
+              margin: EdgeInsets.only(bottom: 10, top: 20),
               child: CupertinoTextField(
                 padding: EdgeInsets.all(10),
                 controller: serverController,
@@ -89,6 +94,13 @@ class EntryScreenState extends State<EntryScreen> {
                       color: Colors.grey.shade300,
                     )),
                 placeholder: 'https://company.example.ru',
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(bottom: 3),
+              child: Text(
+                messageError,
+                style: TextStyle(color: Colors.red[300]),
               ),
             ),
             FullButton(
