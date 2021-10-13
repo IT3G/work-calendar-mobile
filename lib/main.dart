@@ -19,7 +19,7 @@ class App extends StatelessWidget {
     return StoreProvider<AppState>(
         store: store,
         child: FutureBuilder(
-            future: storage.ready,
+            future: Storage.ready,
             builder: (BuildContext context, AsyncSnapshot snapshot) =>
                 CupertinoApp(
                   localizationsDelegates: [

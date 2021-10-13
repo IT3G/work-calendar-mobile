@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/navigation/tab_navigation.dart';
 import 'package:it2g_calendar_mobile/screens/authorization/authorization_screen.dart';
-import 'package:it2g_calendar_mobile/screens/entry/entry_screen.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:it2g_calendar_mobile/screens/entry/entry_screen_container.dart';
 import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
@@ -17,8 +16,8 @@ class Navigation extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String storageServerUrl = getStorageServerUrl();
-    String storageAuthToken = getStorageAuthToken();
+    String storageServerUrl = Storage.getServerUrl();
+    String storageAuthToken = Storage.getAuthToken();
 
     bool hasServerUrl = storageServerUrl.isNotEmpty ||
         dotenv.env['API_BASE_URL'] != null ||

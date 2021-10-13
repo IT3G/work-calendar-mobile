@@ -2,31 +2,58 @@ import 'package:it2g_calendar_mobile/store/profile/profile_actions.dart';
 import 'package:it2g_calendar_mobile/store/settings/settings_actions.dart';
 import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:localstorage/localstorage.dart';
+import 'package:redux/redux.dart';
 
-final LocalStorage storage = new LocalStorage('calendar_it2g');
+class Storage {
+  static final LocalStorage _localStorage = new LocalStorage('calendar_it2g');
+  static final Store<AppState> _store = store;
 
-String getStorageServerUrl() {
-  return storage.getItem('serverUrl') ?? '';
-}
+  static Future<bool> get ready => _localStorage.ready;
 
-String getStorageAuthToken() {
-  return storage.getItem('authToken') ?? '';
-}
+  static String getServerUrl() {
+    return _localStorage.getItem('serverUrl') ?? '';
+  }
 
-void removeAuthToken() async {
-  await storage.deleteItem('authToken');
-  store.dispatch(SetAuthTokenAction(''));
-}
+  static String getAuthToken() {
+    return _localStorage.getItem('authToken') ?? '';
+  }
 
-void removeServerUrl() async {
-  await storage.deleteItem('serverUrl');
-  store.dispatch(SetServerUrlAction(''));
-}
+  static void removeAuthToken() async {
+    await _localStorage.deleteItem('authToken');
+    _store.dispatch(SetAuthTokenAction(''));
+  }
 
-void setStorageServerUrl(String url) async {
-  await storage.setItem('serverUrl', url);
-}
+  static void removeServerUrl() async {
+    await _localStorage.deleteItem('serverUrl');
+    _store.dispatch(SetServerUrlAction(''));
+  }
 
-void setStorageAuthToken(String token) async {
-  await storage.setItem('authToken', token);
+  static void setServerUrl(String url) async {
+    await _localStorage.setItem('serverUrl', url);
+  }
+
+  static void setAuthToken(String token) async {
+    await _localStorage.setItem('authToken', token);
+  }
+
+  static void setAuthorizationData(String login, String password) async {
+    await _localStorage.setItem('login', login);
+    await _localStorage.setItem('password', password);
+  }
+
+  static dynamic getAuthorizationData() {
+    dynamic login = _localStorage.getItem('login');
+    dynamic password = _localStorage.getItem('password');
+
+    if (login == null || password == null) {
+      return null;
+    }
+
+    return {'login': login, 'password': password};
+  }
+
+  static void removeAuthorizationData() async {
+    await _localStorage.setItem('login', null);
+    await _localStorage.setItem('password', null);
+  }
 }

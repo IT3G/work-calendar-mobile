@@ -6,7 +6,7 @@ import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
 
 AppState setServerUrl(AppState state, action) {
-  setStorageServerUrl(action.payload);
+  Storage.setServerUrl(action.payload);
   ApiUrls.setBaseUrl(action.payload);
 
   return updateState(state, new SettingsState(serverUrl: action.payload));
