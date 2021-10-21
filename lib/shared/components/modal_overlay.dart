@@ -33,17 +33,27 @@ class ModalOverlay extends ModalRoute {
   @override
   Duration get transitionDuration => Duration(milliseconds: 150);
 
+  void Function(DragEndDetails)? handleHorizontalDragEnd(
+          BuildContext context) =>
+      (DragEndDetails details) {
+        if (details.velocity.pixelsPerSecond.dx > 0) {
+          Navigator.of(context).pop();
+        }
+      };
+
   @override
   Widget buildPage(BuildContext context, Animation<double> animation,
       Animation<double> secondaryAnimation) {
     return SafeArea(
-        child: Scaffold(
-      appBar: CupertinoNavigationBar(
-        middle: Text(title),
-        trailing: trailing,
-      ),
-      body: Container(child: child),
-    ));
+        child: GestureDetector(
+            onHorizontalDragEnd: handleHorizontalDragEnd(context),
+            child: Scaffold(
+              appBar: CupertinoNavigationBar(
+                middle: Text(title),
+                trailing: trailing,
+              ),
+              body: Container(child: child),
+            )));
   }
 
   @override
