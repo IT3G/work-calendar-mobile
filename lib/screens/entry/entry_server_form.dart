@@ -10,18 +10,23 @@ import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 
 class EntryServerForm extends StatefulWidget {
   final Function setServerUrl;
-  const EntryServerForm({Key? key, required this.setServerUrl})
+  final Function onBack;
+
+  const EntryServerForm(
+      {Key? key, required this.setServerUrl, required this.onBack})
       : super(key: key);
 
   @override
   _EntryServerFormState createState() =>
-      _EntryServerFormState(setServerUrl: setServerUrl);
+      _EntryServerFormState(setServerUrl: setServerUrl, onBack: onBack);
 }
 
 class _EntryServerFormState extends State<EntryServerForm> {
   final Function setServerUrl;
+  final Function onBack;
 
-  _EntryServerFormState({required this.setServerUrl}) : super();
+  _EntryServerFormState({required this.setServerUrl, required this.onBack})
+      : super();
 
   bool loading = false;
   String messageError = '';
@@ -105,19 +110,22 @@ class _EntryServerFormState extends State<EntryServerForm> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(bottom: 3),
-              child: FullButton(
-                  color: Colors.black,
-                  child: Text("Применить",
-                      style: TextStyle(fontSize: 18, color: Colors.white)),
-                  onPress: () {}),
-            ),
+                padding: EdgeInsets.only(bottom: 3),
+                child: FullButton(
+                  child: Text(
+                    "Применить",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  onPress: handleApplyServerUrl,
+                  load: loading,
+                )),
             FullButton(
+              color: Colors.grey.shade500,
               child: Text(
-                "Применить",
+                "Назад",
                 style: TextStyle(fontSize: 18, color: Colors.white),
               ),
-              onPress: handleApplyServerUrl,
+              onPress: onBack,
               load: loading,
             )
           ],

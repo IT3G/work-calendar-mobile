@@ -4,8 +4,10 @@ import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
-import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 import 'package:http/http.dart' as http;
+import 'package:it2g_calendar_mobile/screens/entry/entry_server_form.dart';
+import 'package:it2g_calendar_mobile/screens/entry/qr_scanner.dart';
+import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
 
 class EntryScreen extends StatefulWidget {
   final Function setServerUrl;
@@ -19,6 +21,8 @@ class EntryScreen extends StatefulWidget {
 
 class _EntryScreenState extends State<EntryScreen> {
   final Function setServerUrl;
+
+  String showScreenName = '';
 
   _EntryScreenState({required this.setServerUrl}) : super();
 
@@ -65,8 +69,43 @@ class _EntryScreenState extends State<EntryScreen> {
     }
   }
 
+  void setScreenName(String screenName) {
+    setState(() {
+      showScreenName = screenName;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
+    if (showScreenName == 'entryServerForm') {
+      return EntryServerForm(
+        setServerUrl: setServerUrl,
+        onBack: () => setScreenName(''),
+      );
+    }
+
+    if (showScreenName == 'qrScanner') {
+      return Scaffold(
+        body: Column(
+          children: [
+            Expanded(
+              child: QRScanner(),
+              flex: 11,
+            ),
+            Expanded(
+              child: FullButton(
+                  child: Text(
+                    "Назад",
+                    style: TextStyle(fontSize: 18, color: Colors.white),
+                  ),
+                  onPress: () => setScreenName('')),
+              flex: 1,
+            )
+          ],
+        ),
+      );
+    }
+
     return Scaffold(
       body: Column(
         children: [
@@ -80,48 +119,54 @@ class _EntryScreenState extends State<EntryScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                    color: Colors.blue[900],
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.text_fields,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Ввести",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )
-                  ],
+              GestureDetector(
+                onTap: () => setScreenName('entryServerForm'),
+                child: Container(
+                  width: 140,
+                  height: 140,
+                  decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.text_fields,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Ввести",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )
+                    ],
+                  ),
                 ),
               ),
-              Container(
-                width: 140,
-                height: 140,
-                decoration: BoxDecoration(
-                    color: Colors.blue[900],
-                    borderRadius: BorderRadius.circular(20)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.qr_code_2_outlined,
-                      size: 40,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      "Сканировать",
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    )
-                  ],
+              GestureDetector(
+                onTap: () => setScreenName('qrScanner'),
+                child: Container(
+                  width: 140,
+                  height: 140,
+                  decoration: BoxDecoration(
+                      color: Colors.blue[900],
+                      borderRadius: BorderRadius.circular(20)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.qr_code_2_outlined,
+                        size: 40,
+                        color: Colors.white,
+                      ),
+                      Text(
+                        "Сканировать",
+                        style: TextStyle(color: Colors.white, fontSize: 16),
+                      )
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ],
