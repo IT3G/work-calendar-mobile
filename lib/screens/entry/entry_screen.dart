@@ -13,14 +13,14 @@ class EntryScreen extends StatefulWidget {
   const EntryScreen({Key? key, required this.setServerUrl}) : super(key: key);
 
   @override
-  EntryScreenState createState() =>
-      EntryScreenState(setServerUrl: setServerUrl);
+  _EntryScreenState createState() =>
+      _EntryScreenState(setServerUrl: setServerUrl);
 }
 
-class EntryScreenState extends State<EntryScreen> {
+class _EntryScreenState extends State<EntryScreen> {
   final Function setServerUrl;
 
-  EntryScreenState({required this.setServerUrl}) : super();
+  _EntryScreenState({required this.setServerUrl}) : super();
 
   bool loading = false;
   String messageError = '';
@@ -68,52 +68,64 @@ class EntryScreenState extends State<EntryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      padding: EdgeInsets.only(left: 10, right: 10),
-      child: Form(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
+      body: Column(
+        children: [
+          Padding(
+            padding: EdgeInsets.only(top: 240, bottom: 30),
+            child: Text(
               "Введите URL сервера",
-              style: TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 20,
-                color: Colors.blue.shade300,
-              ),
+              style: TextStyle(fontSize: 25, color: Colors.blue[900]),
             ),
-            Container(
-              margin: EdgeInsets.only(bottom: 10, top: 20),
-              child: CupertinoTextField(
-                padding: EdgeInsets.all(10),
-                controller: serverController,
-                prefix: Padding(
-                    padding: EdgeInsets.only(left: 10),
-                    child: Icon(
-                      Icons.electrical_services_rounded,
-                      color: Colors.grey.shade300,
-                    )),
-                placeholder: 'https://company.example.ru',
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Container(
+                width: 140,
+                height: 140,
+                decoration: BoxDecoration(
+                    color: Colors.blue[900],
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.text_fields,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "Ввести",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: 3),
-              child: Text(
-                messageError,
-                style: TextStyle(color: Colors.red[300]),
+              Container(
+                width: 140,
+                height: 140,
+                decoration: BoxDecoration(
+                    color: Colors.blue[900],
+                    borderRadius: BorderRadius.circular(20)),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.qr_code_2_outlined,
+                      size: 40,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      "Сканировать",
+                      style: TextStyle(color: Colors.white, fontSize: 16),
+                    )
+                  ],
+                ),
               ),
-            ),
-            FullButton(
-              child: Text(
-                "Применить",
-                style: TextStyle(fontSize: 18, color: Colors.white),
-              ),
-              onPress: handleApplyServerUrl,
-              load: loading,
-            )
-          ],
-        ),
+            ],
+          ),
+        ],
       ),
-    ));
+    );
   }
 }
