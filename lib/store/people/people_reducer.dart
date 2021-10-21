@@ -91,7 +91,6 @@ AppState setSelectedPeopleFilters(AppState state, action) {
         if (hasFilters) {
           prepareSelectedFilters
               .removeWhere((filter) => Devisions.management.contains(filter));
-          print(prepareSelectedFilters);
           break;
         }
 

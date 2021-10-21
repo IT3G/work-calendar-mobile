@@ -76,11 +76,6 @@ class StoreFetchService {
       List<String> birthdaysWeek = getMailNicks(jsonDecode(responseWeek.body));
       List<String> birthdaysMonth =
           getMailNicks(jsonDecode(responseMonth.body));
-
-      print(birthdaysToday);
-      print(birthdaysWeek);
-      print(birthdaysMonth);
-
       _store.dispatch(SetBirthdayTodayAction(birthdaysToday));
       _store.dispatch(SetBirthdayWeekAction(birthdaysWeek));
       _store.dispatch(SetBirthdayMonthAction(birthdaysMonth));

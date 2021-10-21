@@ -1,6 +1,6 @@
 class Task {
   final bool approved;
-  final Map<String, dynamic>? attachment;
+  final dynamic attachment;
   final String comment;
   final String dateEnd;
   final String dateStart;

@@ -2,8 +2,8 @@ import 'dart:convert';
 
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 
-User parseUser(Map<String, dynamic>? data) {
-  if (data is Map<String, dynamic>) {
+User parseUser(dynamic data) {
+  if (data != null) {
     dynamic subdivision = data['subdivision'];
 
     return new User(
