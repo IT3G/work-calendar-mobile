@@ -6,8 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:it2g_calendar_mobile/screens/entry/entry_server_form.dart';
-import 'package:it2g_calendar_mobile/screens/entry/qr_scanner.dart';
-import 'package:it2g_calendar_mobile/shared/components/full_button.dart';
+import 'package:qrscan/qrscan.dart' as scanner;
 
 class EntryScreen extends StatefulWidget {
   final Function setServerUrl;
@@ -75,6 +74,11 @@ class _EntryScreenState extends State<EntryScreen> {
     });
   }
 
+  void handleScanQR() async {
+    String? cameraScanResult = await scanner.scan();
+    setServerUrl(cameraScanResult);
+  }
+
   @override
   Widget build(BuildContext context) {
     if (showScreenName == 'entryServerForm') {
@@ -85,25 +89,7 @@ class _EntryScreenState extends State<EntryScreen> {
     }
 
     if (showScreenName == 'qrScanner') {
-      return Scaffold(
-        body: Column(
-          children: [
-            Expanded(
-              child: QRScanner(),
-              flex: 11,
-            ),
-            Expanded(
-              child: FullButton(
-                  child: Text(
-                    "Назад",
-                    style: TextStyle(fontSize: 18, color: Colors.white),
-                  ),
-                  onPress: () => setScreenName('')),
-              flex: 1,
-            )
-          ],
-        ),
-      );
+      return Container();
     }
 
     return Scaffold(
@@ -144,7 +130,7 @@ class _EntryScreenState extends State<EntryScreen> {
                 ),
               ),
               GestureDetector(
-                onTap: () => setScreenName('qrScanner'),
+                onTap: handleScanQR,
                 child: Container(
                   width: 140,
                   height: 140,
