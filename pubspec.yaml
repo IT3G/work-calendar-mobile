@@ -42,6 +42,7 @@ dependencies:
   datetime_picker_formfield: ^2.0.0
   modal_bottom_sheet: ^2.0.0
   connectivity_plus: ^2.0.2
+  qrscan: ^0.3.2
 
 dev_dependencies:
   flutter_test:
