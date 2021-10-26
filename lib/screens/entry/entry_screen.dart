@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:http/http.dart';
 import 'package:http/http.dart' as http;
 import 'package:it2g_calendar_mobile/screens/entry/entry_server_form.dart';
@@ -76,7 +77,11 @@ class _EntryScreenState extends State<EntryScreen> {
 
   void handleScanQR() async {
     String? cameraScanResult = await scanner.scan();
-    setServerUrl(cameraScanResult);
+    if (cameraScanResult != null && cameraScanResult.isNotEmpty) {
+      checkServerUrl(cameraScanResult, () {
+        setServerUrl(cameraScanResult);
+      }, () {});
+    }
   }
 
   @override
@@ -137,20 +142,27 @@ class _EntryScreenState extends State<EntryScreen> {
                   decoration: BoxDecoration(
                       color: Colors.blue[900],
                       borderRadius: BorderRadius.circular(20)),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.qr_code_2_outlined,
-                        size: 40,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        "Сканировать",
-                        style: TextStyle(color: Colors.white, fontSize: 16),
-                      )
-                    ],
-                  ),
+                  child: loading
+                      ? SpinKitDualRing(
+                          size: 30,
+                          lineWidth: 3,
+                          color: Colors.white,
+                        )
+                      : Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.qr_code_2_outlined,
+                              size: 40,
+                              color: Colors.white,
+                            ),
+                            Text(
+                              "Сканировать",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 16),
+                            )
+                          ],
+                        ),
                 ),
               )
             ],
