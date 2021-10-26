@@ -84,8 +84,8 @@ class _EntryServerFormState extends State<EntryServerForm> {
               "Введите URL сервера",
               style: TextStyle(
                 fontWeight: FontWeight.w500,
-                fontSize: 20,
-                color: Colors.blue.shade300,
+                fontSize: 25,
+                color: Colors.blue[900],
               ),
             ),
             Container(
@@ -110,8 +110,9 @@ class _EntryServerFormState extends State<EntryServerForm> {
               ),
             ),
             Padding(
-                padding: EdgeInsets.only(bottom: 3),
+                padding: EdgeInsets.only(bottom: 10),
                 child: FullButton(
+                  color: Colors.blue[900]!,
                   child: Text(
                     "Применить",
                     style: TextStyle(fontSize: 18, color: Colors.white),
@@ -120,10 +121,10 @@ class _EntryServerFormState extends State<EntryServerForm> {
                   load: loading,
                 )),
             FullButton(
-              color: Colors.grey.shade500,
+              color: Colors.transparent,
               child: Text(
                 "Назад",
-                style: TextStyle(fontSize: 18, color: Colors.white),
+                style: TextStyle(fontSize: 18, color: Colors.blue[900]),
               ),
               onPress: onBack,
               load: loading,
