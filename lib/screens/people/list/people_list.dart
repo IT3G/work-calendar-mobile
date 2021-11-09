@@ -2,13 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/people/filters/birthday_message.dart';
 import 'package:it2g_calendar_mobile/screens/people/list/people_list_item.dart';
-import 'package:it2g_calendar_mobile/shared/components/avatar.dart';
-import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
-import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
-import 'package:it2g_calendar_mobile/shared/components/user_data_block.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 
 class PeopleList extends StatelessWidget {
   final List<User> people;

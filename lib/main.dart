@@ -16,25 +16,30 @@ Future main() async {
 class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return StoreProvider<AppState>(
-        store: store,
-        child: FutureBuilder(
-            future: Storage.ready,
-            builder: (BuildContext context, AsyncSnapshot snapshot) =>
-                CupertinoApp(
-                  localizationsDelegates: [
-                    GlobalCupertinoLocalizations.delegate,
-                    // ... app-specific localization delegate[s] here
-                    SfGlobalLocalizations.delegate
-                  ],
-                  //ignore: always_specify_types
-                  supportedLocales: const [
-                    Locale('ru'),
-                    // ... other locales the app supports
-                  ],
-                  locale: const Locale('ru'),
-                  home: NavigationContainer(),
-                  theme: CupertinoThemeData(brightness: Brightness.light),
-                )));
+    return GestureDetector(
+      onTap: () {
+        FocusScope.of(context).requestFocus(new FocusNode());
+      },
+      child: StoreProvider<AppState>(
+          store: store,
+          child: FutureBuilder(
+              future: Storage.ready,
+              builder: (BuildContext context, AsyncSnapshot snapshot) =>
+                  CupertinoApp(
+                    localizationsDelegates: [
+                      GlobalCupertinoLocalizations.delegate,
+                      // ... app-specific localization delegate[s] here
+                      SfGlobalLocalizations.delegate
+                    ],
+                    //ignore: always_specify_types
+                    supportedLocales: const [
+                      Locale('ru'),
+                      // ... other locales the app supports
+                    ],
+                    locale: const Locale('ru'),
+                    home: NavigationContainer(),
+                    theme: CupertinoThemeData(brightness: Brightness.light),
+                  ))),
+    );
   }
 }
