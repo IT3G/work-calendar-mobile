@@ -10,12 +10,14 @@ class PeopleList extends StatelessWidget {
   final bool loading;
   final Function onScroll;
   final List<String> birthdaysToday;
+  final Function setSerachQuery;
 
   PeopleList(
       {Key? key,
       required this.people,
       required this.loading,
       required this.onScroll,
+      required this.setSerachQuery,
       this.birthdaysToday = const []})
       : super(key: key);
 
@@ -53,6 +55,10 @@ class PeopleList extends StatelessWidget {
       );
     }
 
+    void handleSearch(String value) {
+      setSerachQuery(value);
+    }
+
     return Stack(
       children: [
         ListView(
@@ -66,6 +72,7 @@ class PeopleList extends StatelessWidget {
               padding:
                   EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
               child: CupertinoTextField(
+                onChanged: handleSearch,
                 style: TextStyle(fontSize: 20),
                 prefix: Padding(
                   padding: EdgeInsets.only(left: 5),

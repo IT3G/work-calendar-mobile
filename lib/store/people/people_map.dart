@@ -14,6 +14,7 @@ class PeopleStateMap {
 
   final Function setSelectedFilters;
   final Function setSelectedBirthdayFilters;
+  final Function setSearchQuery;
 
   final List<String> birthdaysToday;
 
@@ -26,7 +27,8 @@ class PeopleStateMap {
       required this.birthdayFilters,
       required this.setSelectedBirthdayFilters,
       required this.selectedBirthdayPeriod,
-      required this.birthdaysToday});
+      required this.birthdaysToday,
+      required this.setSearchQuery});
 }
 
 PeopleStateMap getPeopleStateMap(Store<AppState> store) {
@@ -41,5 +43,6 @@ PeopleStateMap getPeopleStateMap(Store<AppState> store) {
       selectedBirthdayPeriod: store.state.peopleState.selectedBirthdayPeriod,
       setSelectedBirthdayFilters: (String filter) =>
           store.dispatch(SetSelectedBirthdayFiltersAction(filter)),
-      birthdaysToday: store.state.peopleState.birthdaysToday);
+      birthdaysToday: store.state.peopleState.birthdaysToday,
+      setSearchQuery: (String query) => store.dispatch(query));
 }
