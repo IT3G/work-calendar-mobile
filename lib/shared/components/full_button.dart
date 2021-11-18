@@ -4,10 +4,15 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 class FullButton extends StatelessWidget {
   final Widget child;
   final Function onPress;
-  bool load;
+  final bool load;
+  final Color color;
 
   FullButton(
-      {Key? key, required this.child, required this.onPress, this.load = false})
+      {Key? key,
+      required this.child,
+      required this.onPress,
+      this.load = false,
+      this.color = Colors.blue})
       : super(key: key);
 
   void handlePress() {
@@ -34,7 +39,7 @@ class FullButton extends StatelessWidget {
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: Colors.blue,
+          color: color,
         ),
         alignment: Alignment.center,
         padding: EdgeInsets.all(10),

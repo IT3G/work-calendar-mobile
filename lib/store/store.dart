@@ -35,7 +35,8 @@ AppState initialState = new AppState(
         birthdaysWeek: [],
         birthdaysMonth: [],
         birthdayFilters: BirthdayPeriods.periods,
-        selectedBirthdayPeriod: BirthdayPeriods.all),
+        selectedBirthdayPeriod: BirthdayPeriods.all,
+        searchQuery: ''),
     profileState: new ProfileState(
         authToken: Storage.getAuthToken(),
         refreshToken: '',

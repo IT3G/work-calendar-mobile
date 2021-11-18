@@ -59,3 +59,9 @@ class SetSelectedBirthdayFiltersAction {
 
   SetSelectedBirthdayFiltersAction(this.payload);
 }
+
+class SetQuerySearchPeopleAction {
+  final String payload;
+
+  SetQuerySearchPeopleAction(this.payload);
+}

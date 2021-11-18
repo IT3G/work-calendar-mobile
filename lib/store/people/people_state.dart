@@ -15,6 +15,8 @@ class PeopleState {
   final List<String> birthdaysWeek;
   final List<String> birthdaysMonth;
 
+  final String searchQuery;
+
   PeopleState(
       {required this.people,
       required this.loading,
@@ -25,5 +27,6 @@ class PeopleState {
       required this.birthdaysToday,
       required this.birthdaysWeek,
       required this.birthdayFilters,
-      required this.selectedBirthdayPeriod});
+      required this.selectedBirthdayPeriod,
+      required this.searchQuery});
 }

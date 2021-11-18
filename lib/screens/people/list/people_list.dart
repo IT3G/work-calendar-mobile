@@ -2,25 +2,22 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:it2g_calendar_mobile/screens/people/filters/birthday_message.dart';
 import 'package:it2g_calendar_mobile/screens/people/list/people_list_item.dart';
-import 'package:it2g_calendar_mobile/shared/components/avatar.dart';
-import 'package:it2g_calendar_mobile/shared/components/labled_row.dart';
-import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
-import 'package:it2g_calendar_mobile/shared/components/user_data_block.dart';
 import 'package:it2g_calendar_mobile/shared/models/user.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
 
 class PeopleList extends StatelessWidget {
   final List<User> people;
   final bool loading;
   final Function onScroll;
   final List<String> birthdaysToday;
+  final Function setSerachQuery;
 
   PeopleList(
       {Key? key,
       required this.people,
       required this.loading,
       required this.onScroll,
+      required this.setSerachQuery,
       this.birthdaysToday = const []})
       : super(key: key);
 
@@ -58,6 +55,10 @@ class PeopleList extends StatelessWidget {
       );
     }
 
+    void handleSearch(String value) {
+      setSerachQuery(value);
+    }
+
     return Stack(
       children: [
         ListView(
@@ -71,6 +72,7 @@ class PeopleList extends StatelessWidget {
               padding:
                   EdgeInsets.only(left: 10, right: 10, bottom: 20, top: 20),
               child: CupertinoTextField(
+                onChanged: handleSearch,
                 style: TextStyle(fontSize: 20),
                 prefix: Padding(
                   padding: EdgeInsets.only(left: 5),
