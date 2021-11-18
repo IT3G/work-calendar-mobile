@@ -25,9 +25,11 @@ class TabNavigation extends StatelessWidget {
     return CupertinoTabScaffold(
         tabBar: CupertinoTabBar(
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.perm_contact_calendar)),
-            BottomNavigationBarItem(icon: Icon(Icons.people_alt)),
-            BottomNavigationBarItem(icon: Icon(Icons.person)),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.perm_contact_calendar), label: 'Календарь'),
+            BottomNavigationBarItem(
+                icon: Icon(Icons.people_alt), label: 'Люди'),
+            BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Профиль'),
           ],
         ),
         tabBuilder: (BuildContext context, int index) => CupertinoTabView(
