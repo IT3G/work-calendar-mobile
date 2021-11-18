@@ -36,7 +36,7 @@ AppState initialState = new AppState(
         birthdaysMonth: [],
         birthdayFilters: BirthdayPeriods.periods,
         selectedBirthdayPeriod: BirthdayPeriods.all,
-        seqrchQuery: ''),
+        searchQuery: ''),
     profileState: new ProfileState(
         authToken: Storage.getAuthToken(),
         refreshToken: '',

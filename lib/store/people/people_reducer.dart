@@ -21,7 +21,7 @@ AppState setPeople(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setPeopleLoading(AppState state, action) {
@@ -38,7 +38,7 @@ AppState setPeopleLoading(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setPeopleFilters(AppState state, action) {
@@ -55,7 +55,7 @@ AppState setPeopleFilters(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setSelectedPeopleFilters(AppState state, action) {
@@ -149,7 +149,7 @@ AppState setSelectedPeopleFilters(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setBirthdayToday(AppState state, action) {
@@ -166,7 +166,7 @@ AppState setBirthdayToday(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setBirthdayWeek(AppState state, action) {
@@ -183,7 +183,7 @@ AppState setBirthdayWeek(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setBirthdayMonth(AppState state, action) {
@@ -200,7 +200,7 @@ AppState setBirthdayMonth(AppState state, action) {
           birthdaysMonth: action.payload,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setBirthdayFilters(AppState state, action) {
@@ -217,7 +217,7 @@ AppState setBirthdayFilters(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: action.payload,
           selectedBirthdayPeriod: state.peopleState.selectedBirthdayPeriod,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setSelectedBirthdayFilters(AppState state, action) {
@@ -259,24 +259,29 @@ AppState setSelectedBirthdayFilters(AppState state, action) {
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: action.payload,
-          seqrchQuery: state.peopleState.seqrchQuery));
+          searchQuery: state.peopleState.searchQuery));
 }
 
 AppState setSearchQueryPeople(AppState state, action) {
+  List<User> searchedPeople = state.peopleState.people
+      .where((User user) =>
+          user.username.toLowerCase().indexOf(action.payload.toLowerCase()) !=
+          -1)
+      .toList();
   return updateState(
       state,
       new PeopleState(
           people: state.peopleState.people,
           loading: state.peopleState.loading,
-          filtredPeople: state.peopleState.filtredPeople,
-          filters: state.peopleState.filters,
+          filtredPeople: searchedPeople,
+          filters: [],
           selectedFilters: state.peopleState.selectedFilters,
           birthdaysToday: state.peopleState.birthdaysToday,
           birthdaysWeek: state.peopleState.birthdaysWeek,
           birthdaysMonth: state.peopleState.birthdaysMonth,
           birthdayFilters: state.peopleState.birthdayFilters,
           selectedBirthdayPeriod: action.payload,
-          seqrchQuery: action.payload));
+          searchQuery: action.payload));
 }
 
 Reducer<AppState> peopleReducer = combineReducers([

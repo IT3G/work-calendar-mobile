@@ -44,5 +44,6 @@ PeopleStateMap getPeopleStateMap(Store<AppState> store) {
       setSelectedBirthdayFilters: (String filter) =>
           store.dispatch(SetSelectedBirthdayFiltersAction(filter)),
       birthdaysToday: store.state.peopleState.birthdaysToday,
-      setSearchQuery: (String query) => store.dispatch(query));
+      setSearchQuery: (String query) =>
+          store.dispatch(SetSearchQueryPeopleAction(query)));
 }
