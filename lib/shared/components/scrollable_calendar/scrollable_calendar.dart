@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:work_calendar/shared/components/loader/loader.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/components/cell.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/components/sign_week_day.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar_event.dart';
@@ -54,8 +55,9 @@ class ScrollableCalendar extends StatefulWidget {
 
 class _ScrollableCalendar extends State<ScrollableCalendar> {
   dynamic _months = {};
-
+  bool showCalendar = false;
   DateTime touchedDate = DateTime(1990, 1, 1);
+
   late ScrollController scrollController;
 
   List<DateTime> _getDays(DateTime start, DateTime end) {
@@ -183,6 +185,10 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
       if (widget.scrollToNow) {
         scrollController.jumpTo(_getScrollOffset(context));
       }
+      
+      setState(() {
+        showCalendar = true;
+      });
     });
 
     setState(() {
@@ -192,60 +198,70 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.grey[200],
-      height: MediaQuery.of(context).size.height,
-      child: ListView(
-        controller: scrollController,
-        padding: const EdgeInsets.only(left: 10.5, right: 10.5, top: 30, bottom: 100),
-        children: [
-          for(String monthKey in _months.keys)
-            Container(
-              key: Key(monthKey),
-              margin: const EdgeInsets.only(bottom: 20),
-              padding: const EdgeInsets.only(bottom: 20),
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
-              child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 10, left: 15),
-                  child: Row(children: [
-                    Text(
-                      monthKey, 
-                      textAlign: TextAlign.left,
-                      style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
-                    )
-                  ],) 
-                ),
-                Row(children:const [
-                  SignWeekDay(name: 'Пн'),
-                  SignWeekDay(name: 'Вт'),
-                  SignWeekDay(name: 'Ср'),
-                  SignWeekDay(name: 'Чт'),
-                  SignWeekDay(name: 'Пт'),
-                  SignWeekDay(name: 'Сб'),
-                  SignWeekDay(name: 'Вс'),
-                ],),
-                ..._getWeeks(_months[monthKey])
-                  .asMap().map((i, week) =>  MapEntry(i, 
-                    Row(
-                      key: Key(i.toString()),
-                      mainAxisAlignment: i == 0 ?  MainAxisAlignment.end : MainAxisAlignment.start,
-                      children: [
-                        for (DateTime date in week) 
-                          Cell(
-                            key: Key(DateFormat.yMd().format(date)),
-                            onTap: _handleTouch, 
-                            date: date, 
-                            color: _getCellColor(date), 
-                            hasEvents: _isEventDate(date), 
-                            selectedDate: touchedDate
+    return Stack(
+      children: [
+          Container(
+            color: Colors.grey[200],
+            height: MediaQuery.of(context).size.height,
+            child: ListView(
+              controller: scrollController,
+              padding: const EdgeInsets.only(left: 10.5, right: 10.5, top: 30, bottom: 100),
+              children: [
+                for(String monthKey in _months.keys)
+                  Container(
+                    key: Key(monthKey),
+                    margin: const EdgeInsets.only(bottom: 20),
+                    padding: const EdgeInsets.only(bottom: 20),
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                    child: Column(children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30, bottom: 10, left: 15),
+                        child: Row(children: [
+                          Text(
+                            monthKey, 
+                            textAlign: TextAlign.left,
+                            style: const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
                           )
-                    ],)
-                  )).values.toList()
-              ],),
-            )
-        ],
-      ),
+                        ],) 
+                      ),
+                      Row(children:const [
+                        SignWeekDay(name: 'Пн'),
+                        SignWeekDay(name: 'Вт'),
+                        SignWeekDay(name: 'Ср'),
+                        SignWeekDay(name: 'Чт'),
+                        SignWeekDay(name: 'Пт'),
+                        SignWeekDay(name: 'Сб'),
+                        SignWeekDay(name: 'Вс'),
+                      ],),
+                      ..._getWeeks(_months[monthKey])
+                        .asMap().map((i, week) =>  MapEntry(i, 
+                          Row(
+                            key: Key(i.toString()),
+                            mainAxisAlignment: i == 0 ?  MainAxisAlignment.end : MainAxisAlignment.start,
+                            children: [
+                              for (DateTime date in week) 
+                                Cell(
+                                  key: Key(DateFormat.yMd().format(date)),
+                                  onTap: _handleTouch, 
+                                  date: date, 
+                                  color: _getCellColor(date), 
+                                  hasEvents: _isEventDate(date), 
+                                  selectedDate: touchedDate
+                                )
+                          ],)
+                        )).values.toList()
+                    ],),
+                  )
+              ],
+            ),
+        ),
+        showCalendar ? Container():
+          Container(
+            color: Colors.white,
+            height: MediaQuery.of(context).size.height,
+            child: const Center(child: Loader(),),
+          )
+      ],
     );
   }
 }

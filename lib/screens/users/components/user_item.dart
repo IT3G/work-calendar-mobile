@@ -30,11 +30,11 @@ class UserItem extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(bottom: 15, top: 15),
           child: Row(children: [
-            Container(
-              margin: const EdgeInsets.only(right: 20),
-              child: Avatar(login: user['mailNickname'], width: 70, height: 70,),
-            ),
-            // Container(width: 70, height: 70, color: Colors.blue, margin: const EdgeInsets.only(right: 20),),
+            // Container(
+            //   margin: const EdgeInsets.only(right: 20),
+            //   child: Avatar(login: user['mailNickname'], width: 70, height: 70,),
+            // ),
+            Container(width: 70, height: 70, color: Colors.blue, margin: const EdgeInsets.only(right: 20),),
             SizedBox(
               width: MediaQuery.of(context).size.width * 0.6,
               child: Text(
