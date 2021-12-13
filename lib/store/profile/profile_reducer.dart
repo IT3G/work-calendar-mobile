@@ -1,53 +1,17 @@
-import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
-import 'package:it2g_calendar_mobile/shared/utils/profile_utils.dart';
-import 'package:it2g_calendar_mobile/store/profile/profile_actions.dart';
-import 'package:it2g_calendar_mobile/store/profile/profile_state.dart';
-import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
+import 'package:work_calendar/store/profile/profile_actions.dart';
 
-AppState setAuthToken(AppState state, action) {
-  return updateState(
-      state,
-      new ProfileState(
-          authToken: action.payload,
-          refreshToken: state.profileState.refreshToken,
-          user: state.profileState.user,
-          loading: state.profileState.loading));
+const dynamic profileInitialState = {'authToken': '', 'profile': {}};
+
+dynamic setAuthToken(dynamic state, action) {
+  return {...state, 'authToken': action.payload};
 }
 
-AppState setRefreshToken(AppState state, action) {
-  return updateState(
-      state,
-      new ProfileState(
-          authToken: state.profileState.authToken,
-          refreshToken: action.payload,
-          user: state.profileState.user,
-          loading: state.profileState.loading));
+dynamic setProfileData(dynamic state, action) {
+  return {...state, 'profile': action.payload};
 }
 
-AppState setUserData(AppState state, action) {
-  return updateState(
-      state,
-      new ProfileState(
-          authToken: state.profileState.authToken,
-          refreshToken: state.profileState.refreshToken,
-          user: action.payload,
-          loading: state.profileState.loading));
-}
-
-AppState setLoadingProfile(AppState state, action) {
-  return updateState(
-      state,
-      new ProfileState(
-          authToken: state.profileState.authToken,
-          refreshToken: state.profileState.refreshToken,
-          user: state.profileState.user,
-          loading: state.profileState.loading));
-}
-
-Reducer<AppState> profileReducer = combineReducers([
-  new TypedReducer<AppState, SetAuthTokenAction>(setAuthToken),
-  new TypedReducer<AppState, SetRefreshTokenAction>(setRefreshToken),
-  new TypedReducer<AppState, SetUserDataAction>(setUserData),
-  new TypedReducer<AppState, SetLoadingProfileAction>(setLoadingProfile)
+Reducer<dynamic> profileReducer = combineReducers([
+  TypedReducer<dynamic, SetAuthTokenAction>(setAuthToken),
+  TypedReducer<dynamic, SetProfileDataAction>(setProfileData)
 ]);

@@ -1,25 +1,9 @@
-import 'package:it2g_calendar_mobile/shared/models/user.dart';
-
 class SetAuthTokenAction {
   final String payload;
-
-  SetAuthTokenAction(this.payload);
+  const SetAuthTokenAction({required this.payload});
 }
 
-class SetRefreshTokenAction {
-  final String payload;
-
-  SetRefreshTokenAction(this.payload);
-}
-
-class SetUserDataAction {
-  final User payload;
-
-  SetUserDataAction(this.payload);
-}
-
-class SetLoadingProfileAction {
-  final bool loading;
-
-  SetLoadingProfileAction(this.loading);
+class SetProfileDataAction {
+  final dynamic payload;
+  const SetProfileDataAction({required this.payload});
 }

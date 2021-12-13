@@ -1,16 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.it2g_calendar_mobile">
-  
-    <uses-permission android:name="android.permission.INTERNET" />
-   
-    <application
-        android:label="it2g_calendar_mobile"
+    package="com.example.work_calendar">
+   <application
+        android:label="work_calendar"
         android:icon="@mipmap/ic_launcher">
-
-        <!-- <meta-data android:name="io.flutter.network-policy"
-             android:resource="@xml/network_security_config"/> -->
-        
-        
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"

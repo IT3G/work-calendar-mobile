@@ -1,11 +1,9 @@
-import 'package:it2g_calendar_mobile/shared/models/task.dart';
-
 class SetTasksAction {
-  final List<Task> payload;
-  SetTasksAction(this.payload);
+  final List<dynamic> payload;
+  const SetTasksAction({required this.payload});
 }
 
-class SetLoadingCalendarAction {
+class SetCalendarLoading {
   final bool payload;
-  SetLoadingCalendarAction(this.payload);
+  const SetCalendarLoading({required this.payload});
 }

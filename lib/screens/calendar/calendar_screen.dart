@@ -1,57 +1,35 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/shared/components/employee_calendar.dart';
-import 'package:it2g_calendar_mobile/screens/calendar/employee_tasks_list.dart';
-import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
-import 'package:it2g_calendar_mobile/shared/models/task.dart';
-import 'package:it2g_calendar_mobile/shared/models/user.dart';
-import 'package:it2g_calendar_mobile/store/store_fetch_service.dart';
-
-import 'employee_calendar_form.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:work_calendar/screens/calendar/components/calendar.dart';
+import 'package:work_calendar/screens/calendar/components/calendar_form.dart';
 
 class CalendarScreen extends StatelessWidget {
-  final Function setTasks;
-  final List<Task> tasks;
-  final User user;
+  final dynamic profile;
+  final List<dynamic> tasks;
 
-  CalendarScreen(
-      {Key? key,
-      required this.tasks,
-      required this.setTasks,
-      required this.user})
-      : super(key: key) {
-    if (tasks.length == 0) {
-      StoreFetchService.fetchTasks(user.mailNickname);
-    }
-  }
+  const CalendarScreen({
+    Key? key, 
+    required this.profile,
+    required this.tasks
+  }) : super(key: key);
 
-  void openCreateEventsForm(BuildContext context) {
-    Navigator.of(context).push(ModalOverlay(
-        title: "Создать событие",
-        child: EmployeeCalendarForm(
-          user: user,
-        )));
+  void _openCalendarForm(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      context: context, 
+      builder: (context) => CalendarForm(profile: profile)
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    // fetchTasks();
     return Scaffold(
-        backgroundColor: Colors.white,
         appBar: CupertinoNavigationBar(
-          middle: Text('Присутствие'),
           trailing: GestureDetector(
-            onTap: () => openCreateEventsForm(context),
-            child: Icon(Icons.add),
+            onTap: () { _openCalendarForm(context); },
+            child: const Text('Добавить'),
           ),
         ),
-        body: ListView(
-          children: [
-            EmployeeCalendar(
-              tasks: tasks,
-            ),
-            EmployeeTasksList()
-          ],
-        ));
+        body: Calendar(profile: profile, tasks: tasks,));
   }
 }

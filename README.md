@@ -1,4 +1,4 @@
-# it2g_calendar_mobile
+# work_calendar
 
 A new Flutter project.
 

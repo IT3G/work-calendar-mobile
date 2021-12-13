@@ -1,5 +1,5 @@
 class SetServerUrlAction {
   final String payload;
 
-  SetServerUrlAction(this.payload);
+  const SetServerUrlAction({required this.payload});
 }

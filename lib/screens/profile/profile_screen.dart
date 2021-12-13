@@ -1,62 +1,59 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/screens/profile/profile_form.dart';
-import 'package:it2g_calendar_mobile/shared/components/modal_overlay.dart';
-import 'package:it2g_calendar_mobile/shared/components/labled_box.dart';
-import 'package:it2g_calendar_mobile/shared/components/user_data_block.dart';
-import 'package:it2g_calendar_mobile/shared/models/user.dart';
-import 'package:it2g_calendar_mobile/store/storage.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
+import 'package:work_calendar/screens/profile_form/profile_form.dart';
+import 'package:work_calendar/shared/components/labeled_box/labeled_box.dart';
+import 'package:work_calendar/shared/components/profile_block/profile_block.dart';
+import 'package:work_calendar/store/storage.dart';
+import 'package:work_calendar/store/store_service.dart';
 
 class ProfileScreen extends StatelessWidget {
-  final User user;
+  final dynamic profile;
 
-  ProfileScreen({Key? key, required this.user}) : super(key: key);
+  const ProfileScreen({Key? key, required this.profile}) : super(key: key);
 
-  void openEditForm(BuildContext context) {
-    Navigator.of(context).push(ModalOverlay(
-        title: "Редактировать",
-        child: ProfileForm(
-          user: user,
-        )));
+  void editProfile(BuildContext context) {
+    showCupertinoModalBottomSheet(
+      context: context,
+      builder: (context) => ProfileForm(
+        profile: profile,
+      ),
+    );
   }
 
-  void logout() async {
-    Storage.removeAuthToken();
-    Storage.removeServerUrl();
+  void logout() {
+    StoreService.setAuthToken('');
+    StoreService.setServerUrl('');
     Storage.removeAuthorizationData();
+    Storage.removeServerUrl();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: CupertinoNavigationBar(
-          middle: Text('Профиль'),
-          trailing: GestureDetector(
-            onTap: () => openEditForm(context),
-            child: Icon(
-              Icons.edit,
-              size: 25,
-            ),
-          )),
-      body: ListView(
-        padding: EdgeInsets.only(bottom: 140),
-        children: [
-          UserDataBlock(
-            showCalendarButton: false,
-            user: user,
+        trailing: GestureDetector(
+          onTap: () => editProfile(context),
+          child: const Text(
+            'Редактировать',
+            style: TextStyle(fontSize: 18),
           ),
-          LabledBox(
-            label: "",
-            child: Padding(
-                padding: EdgeInsets.only(left: 15, top: 15, bottom: 15),
-                child: GestureDetector(
-                  onTap: logout,
-                  child: Text(
-                    "Выйти",
-                    style: TextStyle(color: Colors.red[300], fontSize: 18),
-                  ),
-                )),
-          )
+        ),
+      ),
+      body: ListView(
+        padding:
+            const EdgeInsets.only(left: 20, right: 20, top: 20, bottom: 100),
+        children: [
+          ProfileBlock(profile: profile),
+          LabeledBox(
+              title: '',
+              child: GestureDetector(
+                onTap: logout,
+                child: Text(
+                  'Выйти',
+                  style: TextStyle(fontSize: 18, color: Colors.red[400]!),
+                ),
+              ))
         ],
       ),
     );

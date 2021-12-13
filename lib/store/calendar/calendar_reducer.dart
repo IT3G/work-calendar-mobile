@@ -1,23 +1,20 @@
-import 'package:it2g_calendar_mobile/store/calendar/calendar_actions.dart';
-import 'package:it2g_calendar_mobile/store/calendar/calendar_state.dart';
-import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
+import 'package:work_calendar/store/calendar/calendar_actions.dart';
 
-AppState setTasks(AppState state, action) {
-  return updateState(
-      state,
-      new CalendarState(
-          tasks: action.payload, loading: state.calendarState.loading));
+const dynamic calendarInitialState = {
+  'tasks': [],
+  'calendarLoading': false
+};
+
+dynamic setTasks(dynamic store, action) {
+  return {...store, 'tasks': action.payload};
 }
 
-AppState setLoadingCalendar(AppState state, action) {
-  return updateState(
-      state,
-      new CalendarState(
-          tasks: state.calendarState.tasks, loading: action.payload));
+dynamic setCalendarLoading(dynamic store, action) {
+  return {...store, 'calendarLoading': action.payload};
 }
 
-Reducer<AppState> calendarReducer = combineReducers([
-  new TypedReducer<AppState, SetTasksAction>(setTasks),
-  new TypedReducer<AppState, SetLoadingCalendarAction>(setLoadingCalendar)
+Reducer calendarReducer = combineReducers([
+  TypedReducer<dynamic, SetTasksAction>(setTasks),
+  TypedReducer<dynamic, SetCalendarLoading>(setCalendarLoading)
 ]);

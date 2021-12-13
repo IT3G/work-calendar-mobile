@@ -1,17 +1,14 @@
-import 'package:it2g_calendar_mobile/store/settings/settings_actions.dart';
 import 'package:redux/redux.dart';
-
-import '../store.dart';
+import 'package:work_calendar/store/settings/settings_actions.dart';
 
 class SettingsMapState {
   final String serverUrl;
-  final Function setServerUrl;
+  final String authToken;
 
-  SettingsMapState({required this.serverUrl, required this.setServerUrl});
+  const SettingsMapState({required this.serverUrl, required this.authToken});
 }
 
-SettingsMapState getSettingsMapState(Store<AppState> store) {
-  return new SettingsMapState(
-      serverUrl: store.state.settingsState.serverUrl,
-      setServerUrl: (String url) => store.dispatch(SetServerUrlAction(url)));
+SettingsMapState getSettingsMapState(Store<dynamic> store) {
+  return SettingsMapState(
+      serverUrl: store.state['serverUrl'], authToken: store.state['authToken']);
 }

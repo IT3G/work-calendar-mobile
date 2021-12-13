@@ -1,4 +1,4 @@
-import 'package:it2g_calendar_mobile/shared/models/event_types.dart';
+import 'package:work_calendar/shared/models/event_types.dart';
 
 const List<Map<String, String>> eventTypeNames = [
   {'name': 'Стандартно', 'value': EventTypes.common},

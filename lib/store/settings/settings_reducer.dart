@@ -1,16 +1,15 @@
-import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
-import 'package:it2g_calendar_mobile/store/settings/settings_actions.dart';
-import 'package:it2g_calendar_mobile/store/settings/settings_state.dart';
-import 'package:it2g_calendar_mobile/store/storage.dart';
-import 'package:it2g_calendar_mobile/store/store.dart';
 import 'package:redux/redux.dart';
+import 'package:work_calendar/shared/api/api_urls.dart';
+import 'package:work_calendar/store/settings/settings_actions.dart';
+import 'package:work_calendar/store/storage.dart';
 
-AppState setServerUrl(AppState state, action) {
-  Storage.setServerUrl(action.payload);
+const settingsInitialState = {'serverUrl': ''};
+
+dynamic setServerUrl(dynamic state, action) {
   ApiUrls.setBaseUrl(action.payload);
-
-  return updateState(state, new SettingsState(serverUrl: action.payload));
+  Storage.setServerUrl(action.payload);
+  return {...state, 'serverUrl': action.payload};
 }
 
-Reducer<AppState> settingsReducer = combineReducers(
-    [new TypedReducer<AppState, SetServerUrlAction>(setServerUrl)]);
+Reducer<dynamic> settingsReducer =
+    combineReducers([TypedReducer<dynamic, SetServerUrlAction>(setServerUrl)]);

@@ -1,22 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
-import 'package:it2g_calendar_mobile/navigation/navigation.dart';
-import 'package:it2g_calendar_mobile/store/profile/profile_map.dart';
-import 'package:it2g_calendar_mobile/store/store.dart';
+import 'package:work_calendar/navigation/navigation.dart';
+import 'package:work_calendar/store/settings/settings_map.dart';
 
 class NavigationContainer extends StatelessWidget {
+  const NavigationContainer({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return StoreConnector<AppState, ProfileMapState>(
-        builder: (context, mapState) => Container(
-              color: Colors.grey[50],
-              child: SafeArea(
-                child: Navigation(
-                  serverUrl: mapState.settings.serverUrl,
-                  authToken: mapState.authToken,
-                ),
-              ),
+    return StoreConnector<dynamic, SettingsMapState>(
+        builder: (BuildContext context, mapState) => Navigation(
+              serverUrl: mapState.serverUrl,
+              authToken: mapState.authToken,
             ),
-        converter: (store) => getProfileMapState(store));
+        converter: (store) {
+          return getSettingsMapState(store);
+        });
   }
 }

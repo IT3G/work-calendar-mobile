@@ -1,49 +1,62 @@
 import 'package:flutter/material.dart';
-import 'package:it2g_calendar_mobile/navigation/tab_navigation.dart';
-import 'package:it2g_calendar_mobile/screens/authorization/authorization_screen.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:it2g_calendar_mobile/screens/entry/entry_screen_container.dart';
-import 'package:it2g_calendar_mobile/shared/api/api_service.dart';
-import 'package:it2g_calendar_mobile/shared/constants/api_urls.dart';
-import 'package:it2g_calendar_mobile/store/storage.dart';
+import 'package:work_calendar/navigation/tab_navigation.dart';
+import 'package:work_calendar/screens/authorization/authorization_screen.dart';
+import 'package:work_calendar/screens/entry/entry_screen.dart';
+import 'package:work_calendar/shared/api/api_service.dart';
+import 'package:work_calendar/shared/api/api_urls.dart';
+import 'package:work_calendar/store/storage.dart';
+import 'package:work_calendar/store/store_service.dart';
 
-class Navigation extends StatelessWidget {
-  final String authToken;
+class Navigation extends StatefulWidget {
   final String serverUrl;
+  final String authToken;
 
-  Navigation({Key? key, required this.authToken, required this.serverUrl})
-      : super(key: key);
+  const Navigation({ Key? key, required this.serverUrl, required this.authToken }): super(key: key);
+
+  @override
+  _NavigationState createState() => _NavigationState();
+}
+
+class _NavigationState extends State<Navigation> {
+
+  @override
+  Navigation get widget => super.widget;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Storage.readServerUrl((storageServerUrl) {
+      if (storageServerUrl.isNotEmpty) {
+        StoreService.setServerUrl(storageServerUrl);
+        ApiUrls.setBaseUrl(storageServerUrl);
+      }
+
+      if (storageServerUrl.isNotEmpty) {
+        bool hasAuthToken = widget.authToken.isNotEmpty;
+
+        if (hasAuthToken) {
+          ApiService.setAuthToken(widget.authToken);
+        }
+      }
+    });
+  }
+
 
   @override
   Widget build(BuildContext context) {
-    String storageServerUrl = Storage.getServerUrl();
-    String storageAuthToken = Storage.getAuthToken();
-
-    bool hasServerUrl = storageServerUrl.isNotEmpty ||
-        dotenv.env['API_BASE_URL'] != null ||
-        serverUrl.isNotEmpty;
+    bool hasServerUrl = widget.serverUrl.isNotEmpty;
 
     if (hasServerUrl) {
-      if (storageServerUrl.isNotEmpty) ApiUrls.setBaseUrl(storageServerUrl);
-      if (dotenv.env['API_BASE_URL'] != null)
-        ApiUrls.setBaseUrl(dotenv.env['API_BASE_URL']!);
-      if (serverUrl.isNotEmpty) ApiUrls.setBaseUrl(serverUrl);
-
-      bool hasAuthToken = storageAuthToken.isNotEmpty || authToken.isNotEmpty;
+      bool hasAuthToken = widget.authToken.isNotEmpty;
 
       if (hasAuthToken) {
-        if (storageAuthToken.isNotEmpty)
-          ApiService.setAuthToken(storageAuthToken);
-        if (authToken.isNotEmpty) ApiService.setAuthToken(authToken);
-
-        return TabNavigation();
+        return const TabNavigation();
       }
 
-      return AuthorizationScreen();
+      return const AuthorizationScreen();
     }
 
-    return EntryScreenContainer();
+    return const EntryScreen();
   }
 }
-
-//dotenv.env['API_BASE_URL'] != null
