@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:work_calendar/shared/api/api_service.dart';
+import 'package:work_calendar/shared/components/events_list/events_list.dart';
 import 'package:work_calendar/shared/components/labeled_box/labeled_box.dart';
 import 'package:work_calendar/shared/components/loader/loader.dart';
 import 'package:work_calendar/shared/components/profile_block/components/profile_header.dart';
@@ -40,7 +41,23 @@ class _ProfileBlockState extends State<ProfileBlock> {
       dynamic data = jsonDecode(response.body);
 
       List<ScrollableCalendarEvent> fetchedTasks = TasksUtils.prepareTasks(data);
-      success(fetchedTasks);
+
+      if (widget.profile['birthday'] != null) {
+        DateTime birthday = DateTime.parse(widget.profile['birthday']);
+        int nowYear = DateTime.now().year;
+        
+        success([
+          ...fetchedTasks,
+          ScrollableCalendarEvent(
+            color: Colors.pink[50]!,
+            date: DateTime(nowYear, birthday.month, birthday.day), 
+            description: 'ПРАЗДНИК!',
+            frontLayer: const Text('🥳', style: TextStyle(fontSize: 25),)
+          )
+        ]);
+      } else {
+        success(fetchedTasks);
+      }
     } on HttpException catch(error) {
       print(error);
     } finally {
@@ -71,6 +88,15 @@ class _ProfileBlockState extends State<ProfileBlock> {
             end: DateTime(2035, 12, 1),
             events: data,
             scrollToNow: true,
+            onTap: (date) {
+              showCupertinoModalBottomSheet(
+                context: context, 
+                builder: (context) => EventsList(
+                    date: date,
+                    events: data.where((task) => task.date == date).toList(),
+                  )
+              );
+            },
           ),
         )
       );

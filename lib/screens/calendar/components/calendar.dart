@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
-import 'package:redux/redux.dart';
-import 'package:work_calendar/screens/calendar/components/events_list.dart';
+import 'package:work_calendar/shared/components/events_list/events_list.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar_event.dart';
 import 'package:work_calendar/shared/utils/tasks_utils.dart';
@@ -31,12 +30,28 @@ class _CalendarState extends State<Calendar> {
 
   @override
   void didUpdateWidget(covariant Calendar oldWidget) {
-    // TODO: implement didUpdateWidget
     super.didUpdateWidget(oldWidget);
 
-    setState(() {
-      calendarData = TasksUtils.prepareTasks(widget.tasks);
-    });
+    if (widget.profile['birthday'] != null) {
+      DateTime birthday = DateTime.parse(widget.profile['birthday']);
+      int nowYear = DateTime.now().year;
+      
+      setState(() {
+        calendarData = [
+          ...TasksUtils.prepareTasks(widget.tasks),
+          ScrollableCalendarEvent(
+            color: Colors.pink[50]!,
+            date: DateTime(nowYear, birthday.month, birthday.day), 
+            description: 'ПРАЗДНИК!',
+            frontLayer: const Text('🥳', style: TextStyle(fontSize: 25),)
+          )
+        ];
+      });
+    } else {
+      setState(() {
+        calendarData = TasksUtils.prepareTasks(widget.tasks);
+      });
+    }
   }
 
   void _handleTapCalendar(DateTime date) {

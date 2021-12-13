@@ -7,6 +7,7 @@ class Cell extends StatelessWidget {
   final Color color;
   final bool hasEvents;
   final DateTime selectedDate;
+  final Widget frontLayer;
 
   const Cell({ 
     Key? key, 
@@ -14,7 +15,8 @@ class Cell extends StatelessWidget {
     required this.date,
     required this.color,
     required this.hasEvents,
-    required this.selectedDate
+    required this.selectedDate,
+    required this.frontLayer
   }): super(key: key);
 
   bool _isNow(DateTime date) {
@@ -26,27 +28,38 @@ class Cell extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = (MediaQuery.of(context).size.width / 7) - 9;
+
     return GestureDetector(
       onTap: () { onTap(date); },
       child: 
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(color: _isNow(date) ? Colors.black : Colors.white, width: 1),
-            borderRadius: BorderRadius.circular(15),
-            color: color
-          ),
-          // padding: const EdgeInsets.only(top: 20, bottom: 20),
-          alignment: Alignment.center,
-          width: (MediaQuery.of(context).size.width / 7) - 9,
-          height: (MediaQuery.of(context).size.width / 7) - 9,
-          margin: const EdgeInsets.only(left: 3, right: 3),
-          child: Text(
-            date.day.toString(), 
-            style: TextStyle(
-              fontSize: 20, 
-              color: hasEvents ? Colors.white : Colors.black,
+        Stack(
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: _isNow(date) ? Colors.black : Colors.white, width: 1),
+                borderRadius: BorderRadius.circular(15),
+                color: color
+              ),
+              // padding: const EdgeInsets.only(top: 20, bottom: 20),
+              alignment: Alignment.center,
+              width: width,
+              height: width,
+              margin: const EdgeInsets.only(left: 3, right: 3),
+              child: Text(
+                date.day.toString(), 
+                style: TextStyle(
+                  fontSize: 20, 
+                  color: hasEvents ? Colors.white : Colors.black,
+                ),
+              ),
             ),
-          ),
+            SizedBox(
+              width: width,
+              height: width,
+              child: Center(child: frontLayer,),
+            )
+          ],
         )
     );
   }

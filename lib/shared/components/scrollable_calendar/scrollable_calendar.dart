@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:work_calendar/shared/components/loader/loader.dart';
@@ -137,6 +136,16 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
     return count;
   }
 
+  Widget _getFrontLayerCell(DateTime date) {
+    int eventIndex = widget.events.indexWhere((event) => event.date == date);
+
+    if (eventIndex != -1 && widget.events[eventIndex].frontLayer != null) {
+      return widget.events[eventIndex].frontLayer!;
+    }
+
+    return Container();
+  }
+
   double _getScrollOffset(BuildContext context) {
     int nowYear = DateTime.now().year;
     int nowMonth = DateTime.now().month;
@@ -246,7 +255,8 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
                                   date: date, 
                                   color: _getCellColor(date), 
                                   hasEvents: _isEventDate(date), 
-                                  selectedDate: touchedDate
+                                  selectedDate: touchedDate,
+                                  frontLayer: _getFrontLayerCell(date),
                                 )
                           ],)
                         )).values.toList()

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar_event.dart';
 import 'package:intl/intl.dart';
