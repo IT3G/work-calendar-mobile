@@ -51,9 +51,9 @@ class _AuthorizationFormState extends State<AuthorizationForm> {
         _passwordController.text = '';
       }
 
-      // ApiService.setAuthToken(data['accessToken']);
-      // StoreService.setProfileData(data['user']);
-      // StoreService.setAuthToken(data['accessToken']);
+      ApiService.setAuthToken(data['accessToken']);
+      StoreService.setProfileData(data['user']);
+      StoreService.setAuthToken(data['accessToken']);
     } on HttpException catch (error) {
       print(error);
     } finally {
