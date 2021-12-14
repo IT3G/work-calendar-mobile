@@ -33,27 +33,28 @@ class _AuthorizationFormState extends State<AuthorizationForm> {
        _warning = '';
     });
 
-    if (saveData) {
-      Storage.setAuthorizationData(login, password);
-    }
-
     try {
       Response response =
           await ApiService.login(login: login, password: password);
-      Map<String, dynamic> data = jsonDecode(response.body);
+      dynamic data = jsonDecode(response.body);
 
       print(data);
       
-      if (data['user'] == null) {
+      if (data['user'] != null) {
+        if (saveData) {
+          Storage.setAuthorizationData(login, password);
+        }
+
+        ApiService.setAuthToken(data['accessToken']);
+        StoreService.setProfileData(data['user']);
+        StoreService.setAuthToken(data['accessToken']);
+      } else {
         setState(() {
           _warning = 'Неверный логин или пароль';
         });
         _passwordController.text = '';
       }
 
-      ApiService.setAuthToken(data['accessToken']);
-      StoreService.setProfileData(data['user']);
-      StoreService.setAuthToken(data['accessToken']);
     } on HttpException catch (error) {
       print(error);
     } finally {
