@@ -21,6 +21,8 @@ class AuthorizationForm extends StatefulWidget {
 class _AuthorizationFormState extends State<AuthorizationForm> {
   bool _loading = false;
   bool _showForm = false;
+  String _warning = '';
+
 
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -28,21 +30,30 @@ class _AuthorizationFormState extends State<AuthorizationForm> {
   void signin({required String login, required String password, bool saveData = false}) async {
     setState(() {
       _loading = true;
+       _warning = '';
     });
 
     if (saveData) {
       Storage.setAuthorizationData(login, password);
     }
 
-
     try {
       Response response =
           await ApiService.login(login: login, password: password);
       Map<String, dynamic> data = jsonDecode(response.body);
 
-      ApiService.setAuthToken(data['accessToken']);
-      StoreService.setProfileData(data['user']);
-      StoreService.setAuthToken(data['accessToken']);
+      print(data);
+      
+      if (data['user'] == null) {
+        setState(() {
+          _warning = 'Неверный логин или пароль';
+        });
+        _passwordController.text = '';
+      }
+
+      // ApiService.setAuthToken(data['accessToken']);
+      // StoreService.setProfileData(data['user']);
+      // StoreService.setAuthToken(data['accessToken']);
     } on HttpException catch (error) {
       print(error);
     } finally {
@@ -113,6 +124,12 @@ class _AuthorizationFormState extends State<AuthorizationForm> {
                 style:
                     const TextStyle(fontSize: 25, fontWeight: FontWeight.bold),
               ),
+
+              Padding(
+                padding: const EdgeInsets.only(top: 5, bottom: 5),
+                child: Text(_warning, style: const TextStyle(color: Colors.red),)
+              ),
+
               Padding(
                 padding: const EdgeInsets.only(top: 50),
                 child: FullButton(

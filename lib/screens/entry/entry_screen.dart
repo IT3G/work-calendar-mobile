@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:work_calendar/screens/entry/components/entry_form.dart';
 import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:work_calendar/shared/components/full_button/full_button.dart';
@@ -19,6 +20,7 @@ class EntryScreen extends StatefulWidget {
 
 class _EntryScreen extends State<EntryScreen> {
   bool _loading = false;
+  bool _showQRScan = false;
 
   void _openEntryForm(BuildContext context) {
     Navigator.of(context).push(PageRouteBuilder(
@@ -65,6 +67,21 @@ class _EntryScreen extends State<EntryScreen> {
     }
   }
 
+  void _checkCameraPermission() async {
+    if (await Permission.camera.request().isGranted) {
+      setState(() {
+        _showQRScan = true;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+
+    _checkCameraPermission();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -103,17 +120,19 @@ class _EntryScreen extends State<EntryScreen> {
                       text: 'Ввести',
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(top: 20, left: 10, right: 10),
-                    child: FullButton(
-                      color: Colors.blue[900]!,
-                      onPress: () {
-                        _handleScanQR();
-                      },
-                      text: 'Сканировать QR',
-                    ),
-                  )
+                  
+                  _showQRScan ? 
+                    Padding(
+                      padding:
+                          const EdgeInsets.only(top: 20, left: 10, right: 10),
+                      child: FullButton(
+                        color: Colors.blue[900]!,
+                        onPress: () {
+                          _handleScanQR();
+                        },
+                        text: 'Сканировать QR',
+                      ),
+                    ) : Container()
                 ],
               ),
             )
