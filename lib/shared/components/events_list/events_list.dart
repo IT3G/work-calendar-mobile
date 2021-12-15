@@ -27,7 +27,7 @@ class EventsList extends StatelessWidget {
           ],),
           for (ScrollableCalendarEvent event in events) 
             Container(
-              padding: EdgeInsets.all(10),
+              padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
                 color: event.color.withAlpha(190),
                 borderRadius: BorderRadius.circular(15)

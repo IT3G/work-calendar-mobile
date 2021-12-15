@@ -9,10 +9,13 @@ dynamic usersInitialState = {
 };
 
 dynamic setUsers(dynamic state, action) {
+  List<dynamic> users = (action.payload as List<dynamic>)
+    .where((user) => user['terminationDate'] == null).toList();
+
   return {
     ...state, 
-    'users': action.payload,
-    'filtredUsers': action.payload
+    'users': users,
+    'filtredUsers': users
   };
 }
 
