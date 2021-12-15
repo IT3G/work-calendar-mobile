@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:work_calendar/shared/api/api_service.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar_event.dart';
 import 'package:work_calendar/shared/models/event_types.dart';
 
@@ -16,7 +15,7 @@ class TasksUtils  {
         return Colors.green;
     }
 
-    return Colors.grey.shade400;
+    return Colors.teal[200]!;
   }
 
   static String _getTaskTypeDescription(String taskType) {
@@ -58,7 +57,7 @@ class TasksUtils  {
             events.add(
               ScrollableCalendarEvent(
                 date: date, 
-                description: task['comment'] != null ? "[${_getTaskTypeDescription(task['type'])}] ${task['comment']}" : _getTaskTypeDescription(task['type']),
+                description: task['comment'] != null ? "${_getTaskTypeDescription(task['type'])}\n${task['comment']}" : "${_getTaskTypeDescription(task['type'])}\n...",
                 color: _getTaskColor(task['type'])
               )
             );
@@ -71,7 +70,7 @@ class TasksUtils  {
       events.add(
         ScrollableCalendarEvent(
           date: DateTime.parse(task['dateStart']), 
-          description: task['comment'] != null ? "[${_getTaskTypeDescription(task['type'])}] ${task['comment']}" : _getTaskTypeDescription(task['type']),
+          description: task['comment'] != null ? "${_getTaskTypeDescription(task['type'])}\n${task['comment']}" : "${_getTaskTypeDescription(task['type'])}\n...",
           color: _getTaskColor(task['type'])
         )
       );

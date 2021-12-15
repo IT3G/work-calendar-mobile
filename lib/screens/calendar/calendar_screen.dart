@@ -30,7 +30,7 @@ class CalendarScreen extends StatelessWidget {
             flex: 0,
             child: Container(
               color:  Colors.white,
-              padding: const EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10,),
+              padding: const EdgeInsets.only(top: 20, bottom: 10, left: 15, right: 15,),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
