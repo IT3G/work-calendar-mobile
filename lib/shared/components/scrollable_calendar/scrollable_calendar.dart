@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:work_calendar/shared/components/loader/loader.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/components/cell.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/components/sign_week_day.dart';
@@ -54,8 +55,7 @@ class ScrollableCalendar extends StatefulWidget {
 
 class _ScrollableCalendar extends State<ScrollableCalendar> {
   dynamic _months = {};
-  bool showCalendar = false;
-  DateTime touchedDate = DateTime(1990, 1, 1);
+  bool _showCalendar = false;
 
   late ScrollController scrollController;
 
@@ -167,13 +167,14 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
   }
 
   void _handleTouch(DateTime date) {
-    if (widget.onTap != null) {
-      widget.onTap!(date);
-    }
+    // if (widget.onTap != null) {
+    //   widget.onTap!(date);
+    // }
 
-    setState(() {
-      touchedDate = date;
-    });
+    // setState(() {
+    //   touchedDate = date;
+    // });
+    widget.onTap!(date);
   }
 
   @override
@@ -196,7 +197,7 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
       }
       
       setState(() {
-        showCalendar = true;
+        _showCalendar = true;
       });
     });
 
@@ -251,11 +252,10 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
                               for (DateTime date in week) 
                                 Cell(
                                   key: Key(DateFormat.yMd().format(date)),
-                                  onTap: _handleTouch, 
+                                  onTap: _handleTouch,
                                   date: date, 
                                   color: _getCellColor(date), 
                                   hasEvents: _isEventDate(date), 
-                                  selectedDate: touchedDate,
                                   frontLayer: _getFrontLayerCell(date),
                                 )
                           ],)
@@ -265,7 +265,7 @@ class _ScrollableCalendar extends State<ScrollableCalendar> {
               ],
             ),
         ),
-        showCalendar ? Container():
+        _showCalendar ? Container():
           Container(
             color: Colors.white,
             height: MediaQuery.of(context).size.height,
