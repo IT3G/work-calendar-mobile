@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:work_calendar/screens/calendar/components/calendar.dart';
@@ -24,12 +23,40 @@ class CalendarScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: CupertinoNavigationBar(
-          trailing: GestureDetector(
-            onTap: () { _openCalendarForm(context); },
-            child: const Text('Добавить'),
+      body: SafeArea(child: Flex(
+        direction: Axis.vertical,
+        children: [
+          Expanded(
+            flex: 0,
+            child: Container(
+              color:  Colors.white,
+              padding: const EdgeInsets.only(top: 15, bottom: 15, left: 10, right: 10,),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  GestureDetector(
+                    onTap: () { _openCalendarForm(context); },
+                    child: const Text('Добавить', style: TextStyle(fontSize: 16),),
+                  ),
+                ]
+              ) ,
+            ), 
+            
           ),
-        ),
-        body: Calendar(profile: profile, tasks: tasks,));
+          Expanded(
+            flex: 1,
+            child:  Calendar(profile: profile, tasks: tasks,)
+          )
+        ],
+      ))
+    );
+    // return Scaffold(
+        // appBar: CupertinoNavigationBar(
+        //   trailing: GestureDetector(
+        //     onTap: () { _openCalendarForm(context); },
+        //     child: const Text('Добавить'),
+        //   ),
+        // ),
+    //     body: Calendar(profile: profile, tasks: tasks,));
   }
 }
