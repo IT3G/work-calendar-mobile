@@ -11,9 +11,9 @@ class EventsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 30, left: 10, right: 10), 
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+      padding: const EdgeInsets.only(top: 10, left: 10, right: 10), 
+      child: ListView(
+        // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Row(children: [
             Text(DateFormat('dd.MM.yyyy').format(date), 

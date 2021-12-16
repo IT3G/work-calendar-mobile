@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 import 'package:work_calendar/shared/components/events_list/events_list.dart';
+import 'package:work_calendar/shared/components/modal_layer/modal_layer.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar_event.dart';
 import 'package:work_calendar/shared/utils/tasks_utils.dart';
@@ -66,13 +67,30 @@ class _CalendarState extends State<Calendar> {
       events: calendarData,
       scrollToNow: true,
       onTap: (date) {
-        showCupertinoModalBottomSheet(
-          context: context, 
-          builder: (context) => EventsList(
-              date: date,
-              events: calendarData.where((task) => task.date == date).toList(),
-            )
-        );
+        Navigator.of(context).push(ModalLayer(
+          child: Center(
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20)
+              ),
+              width: MediaQuery.of(context).size.width * 0.95,
+              height: MediaQuery.of(context).size.width * 0.95,
+              child: EventsList(
+                date: date,
+                events: calendarData.where((task) => task.date == date).toList(),
+              ),
+            ),
+          ) 
+          
+        ));
+        // showCupertinoModalBottomSheet(
+        //   context: context, 
+        //   builder: (context) => EventsList(
+        //       date: date,
+        //       events: calendarData.where((task) => task.date == date).toList(),
+        //     )
+        // );
       },
     );
 
