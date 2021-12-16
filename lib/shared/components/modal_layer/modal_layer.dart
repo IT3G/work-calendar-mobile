@@ -28,11 +28,6 @@ class ModalLayer extends ModalRoute {
 
   @override
   Widget buildPage(BuildContext context, Animation<double> animation, Animation<double> secondaryAnimation) {
-    return GestureDetector(
-      onTap: () {
-        // Navigator.of(context).pop();
-      },
-      child: child,
-    );
+    return child;
   }
 }
