@@ -9,6 +9,7 @@ import 'package:work_calendar/shared/api/api_service.dart';
 import 'package:work_calendar/shared/components/events_list/events_list.dart';
 import 'package:work_calendar/shared/components/labeled_box/labeled_box.dart';
 import 'package:work_calendar/shared/components/loader/loader.dart';
+import 'package:work_calendar/shared/components/modal_layer/modal_layer.dart';
 import 'package:work_calendar/shared/components/profile_block/components/profile_header.dart';
 import 'package:work_calendar/shared/components/profile_block/components/skill_label.dart';
 import 'package:work_calendar/shared/components/scrollable_calendar/scrollable_calendar.dart';
@@ -69,6 +70,8 @@ class _ProfileBlockState extends State<ProfileBlock> {
 
   void _openAttendance(BuildContext context) {
     _fetchTasks((data) {
+      
+
       showCupertinoModalBottomSheet(
         context: context, 
         builder: (context) => Scaffold(
@@ -89,12 +92,19 @@ class _ProfileBlockState extends State<ProfileBlock> {
             events: data,
             scrollToNow: true,
             onTap: (date) {
-              showCupertinoModalBottomSheet(
-                context: context, 
-                builder: (context) => EventsList(
-                    date: date,
-                    events: data.where((task) => task.date == date).toList(),
-                  )
+              Navigator.of(context).push(ModalLayer(
+                child: Center(
+                  child: Container(
+                    width: MediaQuery.of(context).size.width * 0.95,
+                    height: MediaQuery.of(context).size.width * 0.95,
+                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(20), color: Colors.white),
+                    child: EventsList(
+                        date: date,
+                        events: data.where((task) => task.date == date).toList(),
+                      )
+                    )
+                  ),
+                )
               );
             },
           ),
