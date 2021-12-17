@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:work_calendar/screens/users/components/users_list.dart';
 import 'package:work_calendar/shared/components/loader/loader.dart';
+import 'package:work_calendar/shared/utils/input_utils.dart';
 import 'package:work_calendar/store/store_service.dart';
 
 class UsersScreen extends StatefulWidget {
@@ -55,7 +56,7 @@ class _UsersScreenState extends State<UsersScreen> {
                     height: 80,
                     child: CupertinoTextField(
                         placeholder: 'Введите',
-                        onChanged: _handleSearch,
+                        onChanged: debounce(_handleSearch),
                         controller: _searchController,
                         padding: const EdgeInsets.only(left: 5, top: 6, bottom: 6),
                         prefix: Padding(
