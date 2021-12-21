@@ -65,7 +65,10 @@ class _UsersScreenState extends State<UsersScreen> {
                         ), 
                         suffix: _searchController.text.isNotEmpty ?
                           GestureDetector(
-                            onTap: _cancelSearch,
+                            onTap: () {
+                              _cancelSearch();
+                              FocusScope.of(context).requestFocus(FocusNode());
+                            },
                             child: Padding(
                               padding: const EdgeInsets.only(right: 10),
                               child:  Icon(Icons.cancel, color: Colors.grey[700]!)//Text('Отмена', style: TextStyle(color: Colors.grey[700]!),),
@@ -81,7 +84,13 @@ class _UsersScreenState extends State<UsersScreen> {
                 Expanded(
                   flex: 1,
                   child: widget.users.isNotEmpty ? 
-                    UsersList(users: widget.users, loading: widget.loading) : 
+                    NotificationListener<ScrollNotification>(
+                      onNotification: (details) {
+                        FocusScope.of(context).requestFocus(FocusNode());
+                        return true;
+                      },
+                      child: UsersList(users: widget.users, loading: widget.loading)
+                    ) : 
                     const Center(
                       child: Text('¯\\_( ͡❛ ͜ʖ ͡❛)_/¯', 
                         style: TextStyle(fontSize: 50, color: Colors.blue),
